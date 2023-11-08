@@ -4,7 +4,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 
@@ -16,7 +15,7 @@ public class DialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dial);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_dial);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();

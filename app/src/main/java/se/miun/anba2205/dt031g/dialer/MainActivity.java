@@ -26,6 +26,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button startCallList = findViewById(R.id.CALL_LIST);
+        startCallList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CallListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button startSettings = findViewById(R.id.SETTINGS);
+        startSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DialActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void openDialActivity(View view) {
