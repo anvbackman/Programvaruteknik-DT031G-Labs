@@ -2,19 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MAIN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text=""-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.886" />-->
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text=""-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.886" />-->
 
     <Button
         android:id="@+id/DIAL"
@@ -27,16 +28,17 @@
         android:id="@+id/CALL_LIST"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CALL LIST"
         android:layout_below="@id/DIAL"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:text="CALL LIST" />
 
     <Button
         android:id="@+id/SETTINGS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/CALL_LIST"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:text="SETTINGS" />
 
     <Button
@@ -44,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/SETTINGS"
+        android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:text="MAP" />
 
@@ -52,12 +55,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/MAP"
+        android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:text="ABOUT" />
 
     <TextView
         android:id="@+id/aboutTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>
