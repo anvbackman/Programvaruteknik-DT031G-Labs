@@ -4,6 +4,13 @@
     <string name="dial_text">This is the Dial activity</string>
 
     <string name="call_list_text">This is the Call List activity</string>
+
+    <string name="about_text">This app is supposed to mimic the keypad on a phone. The app will consist of activities to:
+    * Enter numbers to dial
+    * See previously dialed numbers
+    * Change the keypad settings
+    * Show on a Map where previous calls are dialed from</string>
+
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->
@@ -20,5 +27,6 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

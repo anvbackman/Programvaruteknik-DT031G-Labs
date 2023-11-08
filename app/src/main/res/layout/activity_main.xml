@@ -6,22 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text=""-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.886" />-->
 
     <Button
         android:id="@+id/DIAL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIAL"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:text="DIAL" />
 
     <Button
         android:id="@+id/CALL_LIST"
@@ -38,5 +38,26 @@
         android:layout_below="@id/CALL_LIST"
         android:layout_centerHorizontal="true"
         android:text="SETTINGS" />
+
+    <Button
+        android:id="@+id/MAP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SETTINGS"
+        android:layout_centerHorizontal="true"
+        android:text="MAP" />
+
+    <Button
+        android:id="@+id/ABOUT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/MAP"
+        android:layout_centerHorizontal="true"
+        android:text="ABOUT" />
+
+    <TextView
+        android:id="@+id/aboutTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
