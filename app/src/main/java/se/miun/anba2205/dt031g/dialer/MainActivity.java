@@ -2,16 +2,21 @@ package se.miun.anba2205.dt031g.dialer;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.CompoundButton;
+import android.widget.ToggleButton;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,8 +25,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        getSupportActionBar().setTitle(Html.fromHtml( + getString(R.string.app_name) + "</font>"));
+        ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
+//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
 //        Toolbar toolbar = findViewById(R.id.toolbarMain);
 //        setSupportActionBar(toolbar);
+
+//        ToggleButton toggleButton = findViewById(R.id.toggleButton);
+//        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//                } else {
+//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//                }
+//            }
+//        });
+
+
+
 
         Button startDial = findViewById(R.id.DIAL);
         startDial.setOnClickListener(new View.OnClickListener() {
@@ -90,18 +114,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, CallListActivity.class));
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // Handle landscape orientation
-            setContentView(R.layout.activity_main);
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // Handle portrait orientation
-            setContentView(R.layout.activity_main);
-        }
-    }
 
 //    public void openAbout() {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(this);

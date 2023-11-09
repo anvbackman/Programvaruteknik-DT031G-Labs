@@ -16,7 +16,6 @@
             android:name=".SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="sensor"
             android:parentActivityName=".MainActivity" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -31,33 +30,27 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyChCTxjAz2NWkfAKqIpzDkY38EP5XoTVLA" />
 
         <activity
             android:name=".MapsActivity"
             android:exported="false"
             android:label="Map"
-            android:screenOrientation="sensor"
             android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyChCTxjAz2NWkfAKqIpzDkY38EP5XoTVLA" />
+
         </activity>
         <activity
             android:name=".CallListActivity"
             android:exported="false"
             android:label="Call List"
-            android:screenOrientation="sensor"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DialActivity"
             android:exported="false"
             android:label="Dial"
-            android:screenOrientation="sensor"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="sensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
