@@ -21,70 +21,68 @@
         android:id="@+id/DIAL"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="#03A9F4"
         android:text="DIAL"
-        app:cornerRadius="2dp" />
+        android:backgroundTint="@color/action_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/CALL_LIST"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/DIAL"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="#03A9F4"
         android:text="CALL LIST"
-        app:cornerRadius="2dp" />
+        android:backgroundTint="@color/action_bar"
+        app:layout_constraintTop_toBottomOf="@+id/DIAL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/SETTINGS"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/CALL_LIST"
-        android:layout_marginBottom="5dp"
-        android:layout_centerInParent="true"
-        android:backgroundTint="#03A9F4"
         android:text="SETTINGS"
-        app:cornerRadius="2dp" />
+        android:backgroundTint="@color/action_bar"
+        app:layout_constraintTop_toBottomOf="@+id/CALL_LIST"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/MAP"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/SETTINGS"
-        android:layout_centerInParent="true"
-        android:backgroundTint="#03A9F4"
-        android:layout_marginBottom="5dp"
         android:text="MAP"
-        app:cornerRadius="2dp" />
+        android:backgroundTint="@color/action_bar"
+        app:layout_constraintTop_toBottomOf="@+id/SETTINGS"
+        app:layout_constraintEnd_toEndOf="@+id/SETTINGS"
+        app:layout_constraintStart_toStartOf="@id/SETTINGS" />
 
     <Button
         android:id="@+id/ABOUT"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/MAP"
-        android:layout_centerInParent="true"
-        android:backgroundTint="#03A9F4"
         android:text="ABOUT"
-        app:cornerRadius="2dp" />
+        android:backgroundTint="@color/action_bar"
+        app:layout_constraintTop_toBottomOf="@+id/MAP"
+        app:layout_constraintEnd_toEndOf="@+id/MAP"
+        app:layout_constraintStart_toStartOf="@id/MAP"
+         />
 
     <TextView
         android:id="@+id/welcome_text"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="483dp"
+        android:layout_marginTop="240dp"
         android:text="@string/welcome_message"
-        android:textSize="20dp" />
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ToggleButton-->
+    <!--    <ToggleButton-->
 <!--        android:id="@+id/toggleButton"-->
 <!--        android:layout_width="40dp"-->
 <!--        android:layout_height="40dp"-->
