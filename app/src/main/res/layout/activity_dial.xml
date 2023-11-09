@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/dial_text"
+        android:layout_centerInParent="true"
         android:textSize="20sp"
         android:gravity="center"
         android:id="@+id/dialTextView"

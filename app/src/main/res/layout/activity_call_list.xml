@@ -12,6 +12,7 @@
         android:text="@string/call_list_text"
         android:textSize="20sp"
         android:gravity="center"
+        android:layout_centerInParent="true"
         android:id="@+id/callListTextView"
         />
 </RelativeLayout>

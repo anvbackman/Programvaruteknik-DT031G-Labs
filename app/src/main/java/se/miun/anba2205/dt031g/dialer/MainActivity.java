@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +88,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCallListActivity(View view) {
         startActivity(new Intent(this, CallListActivity.class));
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // Handle landscape orientation
+            setContentView(R.layout.activity_main);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // Handle portrait orientation
+            setContentView(R.layout.activity_main);
+        }
     }
 
 //    public void openAbout() {
