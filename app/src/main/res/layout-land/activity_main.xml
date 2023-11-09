@@ -21,61 +21,70 @@
         android:id="@+id/DIAL"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/gradient_button"
-        android:text="DIAL"
-        app:cornerRadius="2dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="162dp"
+        android:layout_marginBottom="183dp"
+        app:cornerRadius="2dp"
+        android:text="DIAL" />
 
     <Button
         android:id="@+id/CALL_LIST"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/DIAL"
-        android:layout_centerInParent="true"
-        android:backgroundTint="#03A9F4"
-        android:text="CALL LIST"
-        app:cornerRadius="2dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="400dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="182dp"
+        app:cornerRadius="2dp"
+        android:text="CALL LIST" />
 
     <Button
         android:id="@+id/SETTINGS"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/CALL_LIST"
-        android:layout_centerInParent="true"
-        android:backgroundTint="#03A9F4"
-        android:text="SETTINGS"
-        app:cornerRadius="2dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="370dp"
+        android:layout_marginBottom="121dp"
+        app:cornerRadius="2dp"
+        android:text="SETTINGS" />
 
     <Button
         android:id="@+id/MAP"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/SETTINGS"
-        android:layout_centerInParent="true"
-        android:backgroundTint="#03A9F4"
-        android:text="MAP"
-        app:cornerRadius="2dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="121dp"
+        app:cornerRadius="2dp"
+        android:text="MAP" />
 
     <Button
         android:id="@+id/ABOUT"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/MAP"
-        android:layout_centerInParent="true"
-        android:backgroundTint="#03A9F4"
-        android:text="ABOUT"
-        app:cornerRadius="2dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="254dp"
+        android:layout_marginBottom="62dp"
+        app:cornerRadius="2dp"
+        android:text="ABOUT" />
 
     <TextView
-        android:id="@+id/welcome_text"
+        android:id="@+id/aboutTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/welcome_text_land"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="483dp"
+        android:layout_marginEnd="199dp"
+        android:layout_marginBottom="260dp"
         android:text="@string/welcome_message"
-        android:textSize="20dp" />
-
+        android:textSize="25dp" />
 
 </RelativeLayout>

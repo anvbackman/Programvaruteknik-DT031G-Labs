@@ -5,6 +5,8 @@
 
     <string name="call_list_text">This is the Call List activity</string>
 
+    <string name="welcome_message">What would you like to do?</string>
+
     <string name="about_text">This app is supposed to mimic the keypad on a phone. The app will consist of activities to:
     * Enter numbers to dial
     * See previously dialed numbers
