@@ -5,37 +5,36 @@
     android:id="@+id/MAIN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <!--    <TextView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text=""-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.886" />-->
+
+
 
     <Button
         android:id="@+id/DIAL"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="DIAL"
+        app:cornerRadius="2dp"
         android:backgroundTint="@color/action_bar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:alpha="0.60"
+        android:textColor="@color/text_color"
+        app:layout_constraintBottom_toTopOf="@id/CALL_LIST"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+         />
 
     <Button
         android:id="@+id/CALL_LIST"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="CALL LIST"
+        android:alpha="0.60"
+        app:cornerRadius="2dp"
+        android:textColor="@color/text_color"
         android:backgroundTint="@color/action_bar"
-        app:layout_constraintTop_toBottomOf="@+id/DIAL"
+        app:layout_constraintBottom_toTopOf="@+id/SETTINGS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -44,17 +43,24 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="SETTINGS"
+        android:alpha="0.60"
+        app:cornerRadius="2dp"
+        android:textColor="@color/text_color"
         android:backgroundTint="@color/action_bar"
-        app:layout_constraintTop_toBottomOf="@+id/CALL_LIST"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/MAP"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="MAP"
+        android:alpha="0.60"
+        app:cornerRadius="2dp"
         android:backgroundTint="@color/action_bar"
+        android:textColor="@color/text_color"
         app:layout_constraintTop_toBottomOf="@+id/SETTINGS"
         app:layout_constraintEnd_toEndOf="@+id/SETTINGS"
         app:layout_constraintStart_toStartOf="@id/SETTINGS" />
@@ -64,6 +70,9 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="ABOUT"
+        android:alpha="0.60"
+        app:cornerRadius="2dp"
+        android:textColor="@color/text_color"
         android:backgroundTint="@color/action_bar"
         app:layout_constraintTop_toBottomOf="@+id/MAP"
         app:layout_constraintEnd_toEndOf="@+id/MAP"
@@ -72,27 +81,14 @@
 
     <TextView
         android:id="@+id/welcome_text"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
         android:text="@string/welcome_message"
-        android:textSize="15dp"
+        android:textSize="25dp"
+        android:textColor="@color/text_color"
+        app:layout_constraintBottom_toTopOf="@id/DIAL"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--    <ToggleButton-->
-<!--        android:id="@+id/toggleButton"-->
-<!--        android:layout_width="40dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginBottom="5dp"-->
-<!--        android:layout_marginStart="5dp"-->
-<!--        android:checked="false"-->
-<!--        android:background="@drawable/flip_screen"-->
-<!--        android:textOff=""-->
-<!--        android:textOn="" />-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
