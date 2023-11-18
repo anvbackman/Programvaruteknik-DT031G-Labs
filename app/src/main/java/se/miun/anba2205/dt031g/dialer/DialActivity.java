@@ -5,6 +5,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.Objects;
 
@@ -17,10 +18,7 @@ public class DialActivity extends AppCompatActivity {
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
 
-//        DialpadButton dialpadButton = new DialpadButton(this);
-//        dialpadButton.setTitle("1");
-//        dialpadButton.setMessage("ABC");
-//        setContentView(dialpadButton);
+
 
     }
 }

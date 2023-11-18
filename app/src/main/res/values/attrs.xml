@@ -4,7 +4,7 @@
     <declare-styleable name="DialpadButton">
         <attr name="title" format="string"/>
         <attr name="message" format="string"/>
-        <attr name="button_color_start" format="color"/>
+        <attr name="button_color" format="color"/>
     </declare-styleable>
 
 
