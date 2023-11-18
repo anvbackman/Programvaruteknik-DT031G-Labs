@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class DialpadButton extends ConstraintLayout {
+public class DialpadButton extends ConstraintLayout implements View.OnTouchListener {
 
     private TextView title;
     private TextView message;
@@ -34,17 +35,13 @@ public class DialpadButton extends ConstraintLayout {
         super(context, attrs);
         init(context, attrs);
         // Obtain custom attributes and set text
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DialpadButton);
-        setTitle(a.getString(R.styleable.DialpadButton_title));
-        setMessage(a.getString(R.styleable.DialpadButton_message));
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.dialpad_button);
+        setTitle(a.getString(R.styleable.dialpad_button_title));
+        setMessage(a.getString(R.styleable.dialpad_button_message));
         a.recycle();
 
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animation();
-            }
-        });
+        setOnTouchListener(this);
+
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -65,19 +62,36 @@ public class DialpadButton extends ConstraintLayout {
         }
     }
 
-    private void animation() {
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                // Handle touch down event
+                animation(1.1f); // Scale up by 10%
+                break;
+
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                // Handle touch up or cancel event
+                animation(1.0f); // Reset to the original size
+                break;
+        }
+        return true; // Consume the touch event
+    }
+
+    private void animation(float scale) {
 
 //        final Button button = (Button) findViewById(R.id.dialpad_button_1);
-        PropertyValuesHolder x = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.1f);
-        PropertyValuesHolder y = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.1f);
+        PropertyValuesHolder x = PropertyValuesHolder.ofFloat(View.SCALE_X, scale);
+        PropertyValuesHolder y = PropertyValuesHolder.ofFloat(View.SCALE_Y, scale);
 
 
         ObjectAnimator buttonAnimation = ObjectAnimator.ofPropertyValuesHolder(this, x, y);
         buttonAnimation.setDuration(300);
         buttonAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        buttonAnimation.setRepeatCount(1);
-        buttonAnimation.setRepeatMode(ValueAnimator.REVERSE);
+//        buttonAnimation.setRepeatCount(1);
+//        buttonAnimation.setRepeatMode(ValueAnimator.REVERSE);
         buttonAnimation.start();
 
 

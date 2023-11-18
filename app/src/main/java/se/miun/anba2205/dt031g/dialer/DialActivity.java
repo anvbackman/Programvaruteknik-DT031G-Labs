@@ -18,6 +18,10 @@ public class DialActivity extends AppCompatActivity {
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
 
+//        DialpadButton button1 = new DialpadButton(this, null);
+//        button1.setTitle("1");
+//        button1.setMessage("ABC");
+//        setContentView(button1);
 
 
     }

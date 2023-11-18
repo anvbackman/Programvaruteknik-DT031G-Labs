@@ -31,8 +31,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialpad_button_1"
-        app:message="XXL"
-        app:title="2" />
+         />
 
     <se.miun.anba2205.dt031g.dialer.DialpadButton
         android:id="@+id/dialpad_button_3"
@@ -43,8 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialpad_button_2"
-        app:title="3"
-        app:message="DAL" />
+         />
 
 
 
