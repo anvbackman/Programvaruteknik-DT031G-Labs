@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="action_bar">#d66bff</color>
     <color name="text_color">#0257a9</color>
+    <color name="button_color_start">#d66bff</color>
 </resources>
