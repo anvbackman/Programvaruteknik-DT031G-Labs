@@ -16,38 +16,64 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class DialpadButton extends ConstraintLayout implements View.OnTouchListener {
+import se.miun.anba2205.dt031g.dialer.databinding.DialpadButtonBinding;
+
+public class DialpadButton extends ConstraintLayout {
 
     private TextView title;
     private TextView message;
 
-//    public DialpadButton(Context context) {
-//        super(context);
-//        init(context, null);
-//    }
 
-//    public DialpadButton(Context context, AttributeSet attrs) {
-//        super(context, attrs);
-//        init(context, attrs);
-//    }
+    public DialpadButton(Context context) {
+        super(context);
+        initialize(context, null);
+    }
 
     public DialpadButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
+        initialize(context, attrs);
         // Obtain custom attributes and set text
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.dialpad_button);
-        setTitle(a.getString(R.styleable.dialpad_button_title));
-        setMessage(a.getString(R.styleable.dialpad_button_message));
-        a.recycle();
 
-        setOnTouchListener(this);
 
+//        setOnTouchListener(this);
+
+//        setSize();
     }
 
-    private void init(Context context, AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.dialpad_button, this, true);
-        title = findViewById(R.id.title);
-        message = findViewById(R.id.message);
+    public DialpadButton(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initialize(context, attrs);
+    }
+
+    public void initialize(Context context, AttributeSet attrs) {
+
+        DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
+        title = binding.title;
+        message = binding.message;
+
+        if (attrs != null) {
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.dialpad_button);
+            try {
+                int titleColor = typedArray.getColor(R.styleable.dialpad_button_title_color, title.getCurrentTextColor());
+                float titleSize = typedArray.getDimension(R.styleable.dialpad_button_title_text_size, title.getTextSize());
+
+                int messageColor = typedArray.getColor(R.styleable.dialpad_button_message_color, message.getCurrentTextColor());
+                float messageSize = typedArray.getDimension(R.styleable.dialpad_button_message_text_size, message.getTextSize());
+
+                title.setTextColor(titleColor);
+                title.setTextSize(titleSize);
+
+                message.setTextColor(messageColor);
+                message.setTextSize(messageSize);
+
+                setTitle(typedArray.getString(R.styleable.dialpad_button_title));
+                setMessage(typedArray.getString(R.styleable.dialpad_button_message));
+
+            }
+            finally {
+                typedArray.recycle();
+            }
+        }
     }
 
     public void setTitle(String titleText) {
@@ -62,47 +88,76 @@ public class DialpadButton extends ConstraintLayout implements View.OnTouchListe
         }
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                // Handle touch down event
-                animation(1.1f); // Scale up by 10%
-                break;
+//    private void init(AttributeSet attrs) {
+//        inflate(getContext(), R.layout.dialpad_button, this);
+//        title = findViewById(R.id.title);
+//        message = findViewById(R.id.message);
+//
+//        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.dialpad_button, 0, 0);
+//        setTitle(typedArray.getString(R.styleable.dialpad_button_title));
+//        setMessage(typedArray.getString(R.styleable.dialpad_button_message));
+//        typedArray.recycle();
+//
+//    }
+//
+    public void setSize() {
+        int titleHeight = (int) (getHeight() * 0.75);
+        int messageHeight = getHeight() - titleHeight;
+        setMinimumHeight(Math.min(titleHeight, messageHeight));
 
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
-                // Handle touch up or cancel event
-                animation(1.0f); // Reset to the original size
-                break;
-        }
-        return true; // Consume the touch event
+        title.getLayoutParams().height = titleHeight;
+        message.getLayoutParams().height = messageHeight;
+
+        title.requestLayout();
+        message.requestLayout();
     }
+//
+//    public void setTitle(String titleText) {
+//        if (titleText != null && !titleText.isEmpty()) {
+//            title.setText(titleText.substring(0, 1));
+//        }
+//    }
+//
+//    public void setMessage(String messageText) {
+//        if (messageText != null && !messageText.isEmpty()) {
+//            message.setText(messageText.substring(0, Math.min(4, messageText.length())));
+//        }
+//    }
+//
+//    @Override
+//    public boolean onTouch(View view, MotionEvent motionEvent) {
+//        switch (motionEvent.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                // Handle touch down event
+//                animation(1.1f); // Scale up by 10%
+//                break;
+//
+//            case MotionEvent.ACTION_UP:
+//            case MotionEvent.ACTION_CANCEL:
+//                // Handle touch up or cancel event
+//                animation(1.0f); // Reset to the original size
+//                break;
+//        }
+//        return true; // Consume the touch event
+//    }
+//
+//    private void animation(float scale) {
+//
+//
+//        PropertyValuesHolder x = PropertyValuesHolder.ofFloat(View.SCALE_X, scale);
+//        PropertyValuesHolder y = PropertyValuesHolder.ofFloat(View.SCALE_Y, scale);
+//
+//
+//        ObjectAnimator buttonAnimation = ObjectAnimator.ofPropertyValuesHolder(this, x, y);
+//        buttonAnimation.setDuration(300);
+//        buttonAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+//
+//        buttonAnimation.start();
+//
+//
+//    }
+//
 
-    private void animation(float scale) {
-
-//        final Button button = (Button) findViewById(R.id.dialpad_button_1);
-        PropertyValuesHolder x = PropertyValuesHolder.ofFloat(View.SCALE_X, scale);
-        PropertyValuesHolder y = PropertyValuesHolder.ofFloat(View.SCALE_Y, scale);
-
-
-        ObjectAnimator buttonAnimation = ObjectAnimator.ofPropertyValuesHolder(this, x, y);
-        buttonAnimation.setDuration(300);
-        buttonAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-
-//        buttonAnimation.setRepeatCount(1);
-//        buttonAnimation.setRepeatMode(ValueAnimator.REVERSE);
-        buttonAnimation.start();
-
-
-    }
-
-//    private void setupAnimation(View view, final Animator animation, final int animationID) {
-//        view.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                animation.start();
-//            }
-//        });
 
 
 }
