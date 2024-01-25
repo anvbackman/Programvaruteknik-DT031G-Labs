@@ -15,15 +15,13 @@
 
     <se.miun.anba2205.dt031g.dialer.DialpadButton
         android:id="@+id/dialpad_button_1"
-        android:layout_width="@dimen/button_width"
-        android:layout_height="@dimen/button_height"
-
-
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:alpha="0.60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/verticalGuideline"
-
         app:title_color="@color/text_color"
         app:message_color="@color/text_color"
         app:message="ABC"
@@ -33,27 +31,23 @@
         android:id="@+id/dialpad_button_2"
         android:layout_width="100dp"
         android:layout_height="50dp"
-
-
+        android:alpha="0.60"
         app:layout_constraintBottom_toTopOf="@+id/dialpad_button_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialpad_button_1"
-
         app:title_color="@color/text_color"
         app:message_color="@color/text_color"
         app:message="DKK"
-
         app:title="2"
          />
 
     <se.miun.anba2205.dt031g.dialer.DialpadButton
         android:id="@+id/dialpad_button_3"
         android:layout_width="50dp"
-        android:layout_height="@dimen/button_height"
-
-
+        android:layout_height="100dp"
+        android:alpha="0.60"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
