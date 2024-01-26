@@ -11,21 +11,20 @@ import java.util.Objects;
 
 public class DialActivity extends AppCompatActivity {
 
-//    private enum Sound {ONE, TWO, THREE}
-//    private Map<Sound, Integer> soundIds;
-    private SoundPlayer soundplayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dial);
 
-//        soundplayer = new SoundPlayer(this);
-//
-//        DialpadButton button1 = findViewById(R.id.dialpad_button_1);
-//        button1.setSound
+        //    private enum Sound {ONE, TWO, THREE}
+        //    private Map<Sound, Integer> soundIds;
+        SoundPlayer soundPlayer = new SoundPlayer(this);
 
-//        findViewById(R.id.dialpad_button_1).setOnClickListener(view -> soundplayer.playSound(Sound.ONE));
+        // Find your DialpadButton instance (replace R.id.your_dialpad_button_id with the actual ID)
+        Dialpad dialpad = findViewById(R.id.dialpad);
 
+        // Set the SoundPlayer reference in DialpadButton
+        dialpad.setSoundPlayer(soundPlayer);
 
 
 
@@ -33,11 +32,19 @@ public class DialActivity extends AppCompatActivity {
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
 
-//        DialpadButton button1 = new DialpadButton(this, null);
-//        button1.setTitle("1");
-//        button1.setMessage("ABC");
-//        setContentView(button1);
+
 
 
     }
+
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//
+//
+//        SoundPlayer soundPlayer2 = new SoundPlayer(this);
+//        if (soundPlayer2 != null) {
+//            soundPlayer2.destroy();
+//        }
+//    }
 }

@@ -17,6 +17,9 @@ import se.miun.anba2205.dt031g.dialer.databinding.DialpadBinding;
 import se.miun.anba2205.dt031g.dialer.databinding.DialpadButtonBinding;
 
 public class Dialpad extends ConstraintLayout {
+
+    SoundPlayer soundPlayer;
+
     public Dialpad(Context context) {
         super(context);
         initialize(context, null);
@@ -35,10 +38,19 @@ public class Dialpad extends ConstraintLayout {
     public void initialize(Context context, AttributeSet attrs) {
 
         LayoutInflater.from(context).inflate(R.layout.dialpad, this, true);
+
+        soundPlayer = new SoundPlayer(context);
 //        DialpadBinding binding = DialpadBinding.inflate(LayoutInflater.from(context), this, true);
 
 
 
+
+
+    }
+
+    // Sets the SoundPlayer reference
+    public void setSoundPlayer(SoundPlayer soundPlayer) {
+        this.soundPlayer = soundPlayer;
     }
 
 

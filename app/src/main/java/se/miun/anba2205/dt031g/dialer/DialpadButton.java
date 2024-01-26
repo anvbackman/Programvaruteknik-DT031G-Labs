@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -39,7 +40,10 @@ public class DialpadButton extends ConstraintLayout {
     // Initializes the view
     public void initialize(Context context, AttributeSet attrs) {
 
-//        soundPlayer = new SoundPlayer(context);
+        soundPlayer = new SoundPlayer(context);
+//        soundPlayer.setDialpadButton(this);
+
+
         // Inflates the layout using binding
         DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
         title = binding.title;
@@ -90,15 +94,64 @@ public class DialpadButton extends ConstraintLayout {
             @Override
             public void onClick(View view) {
                 scaleAnimator.start();
-//                soundPlayer.play(context);
+
+                if (soundPlayer != null) {
+                    String titleText = title.getText().toString();
+
+                    switch (titleText) {
+                        case "1":
+                            soundPlayer.playSound(SoundPlayer.Sound.ONE);
+                            Log.d("---", SoundPlayer.Sound.ONE.toString());
+                            break;
+                        case "2":
+                            soundPlayer.playSound(SoundPlayer.Sound.TWO);
+                            break;
+                        case "3":
+                            soundPlayer.playSound(SoundPlayer.Sound.THREE);
+                            break;
+                        case "4":
+                            soundPlayer.playSound(SoundPlayer.Sound.FOUR);
+                            break;
+                        case "5":
+                            soundPlayer.playSound(SoundPlayer.Sound.FIVE);
+                            break;
+                        case "6":
+                            soundPlayer.playSound(SoundPlayer.Sound.SIX);
+                            break;
+                        case "7":
+                            soundPlayer.playSound(SoundPlayer.Sound.SEVEN);
+                            break;
+                        case "8":
+                            soundPlayer.playSound(SoundPlayer.Sound.EIGHT);
+                            break;
+                        case "9":
+                            soundPlayer.playSound(SoundPlayer.Sound.NINE);
+                            break;
+                        case "0":
+                            soundPlayer.playSound(SoundPlayer.Sound.ZERO);
+                            break;
+                        case "*":
+                            soundPlayer.playSound(SoundPlayer.Sound.STAR);
+                            break;
+                        case "#":
+                            soundPlayer.playSound(SoundPlayer.Sound.POUND);
+                            break;
+
+                    }
+                }
+
+
             }
         });
 
 
     }
 
-    public TextView getTitle() {
-        return title;
+
+
+    // Setter method for SoundPlayer
+    public void setSoundPlayer(SoundPlayer soundPlayer) {
+        this.soundPlayer = soundPlayer;
     }
 
     // Sets the title text and makes sure that only the first character will show
