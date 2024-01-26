@@ -9,9 +9,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+
+    private boolean isAboutUsed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,23 +72,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                String aboutText = getString(R.string.about_text);
-                builder.setMessage(aboutText)
-                        .setTitle("About");
+                if (!isAboutUsed) {
+                    String aboutText = getString(R.string.about_text);
+                    builder.setMessage(aboutText)
+                            .setTitle("About");
 
-                // Add button to close the About screen
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
+                    // Add button to close the About screen
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                            isAboutUsed = true;
+                        }
+                    });
 
-                // Creates and shows the dialog screen
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                    // Creates and shows the dialog screen
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "About dialog can only be shown once!", Toast.LENGTH_SHORT).show();
+                }
+
+
+
             }
-
-
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("about_dialog_state", isAboutUsed);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        isAboutUsed = savedInstanceState.getBoolean("about_dialog_state");
     }
 }

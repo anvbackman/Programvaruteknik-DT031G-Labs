@@ -18,6 +18,8 @@ public class DialpadButton extends ConstraintLayout {
     private static final float SCALE_UP = 1.1f; // Used for button scaling
     private TextView title;
     private TextView message;
+    private SoundPlayer soundPlayer;
+
 
     public DialpadButton(Context context) {
         super(context);
@@ -37,6 +39,7 @@ public class DialpadButton extends ConstraintLayout {
     // Initializes the view
     public void initialize(Context context, AttributeSet attrs) {
 
+        soundPlayer = new SoundPlayer(context);
         // Inflates the layout using binding
         DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
         title = binding.title;
@@ -68,6 +71,7 @@ public class DialpadButton extends ConstraintLayout {
             }
         }
 
+
         // Creates an ObjectAnimator used to scale the button
         ObjectAnimator scaleAnimator = ObjectAnimator.ofPropertyValuesHolder(
                 this,
@@ -86,8 +90,15 @@ public class DialpadButton extends ConstraintLayout {
             @Override
             public void onClick(View view) {
                 scaleAnimator.start();
+                soundPlayer.play(context);
             }
         });
+
+
+    }
+
+    public TextView getTitle() {
+        return title;
     }
 
     // Sets the title text and makes sure that only the first character will show

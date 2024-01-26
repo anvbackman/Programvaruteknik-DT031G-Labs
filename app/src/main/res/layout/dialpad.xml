@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <GridLayout
+        android:id="@+id/button_grid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="3"
+        android:rowCount="4"
+
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message=""
+            app:title="1"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="ABC"
+            app:title="2"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="DEF"
+            app:title="3"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="GHI"
+            app:title="4"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="JKL"
+            app:title="5"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="MNO"
+            app:title="6"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="PQRS"
+            app:title="7"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_8"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="TUV"
+            app:title="8"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_9"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="WXYZ"
+            app:title="9"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_star"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message=""
+            app:title="*"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message="+"
+            app:title="0"/>
+
+        <se.miun.anba2205.dt031g.dialer.DialpadButton
+            android:id="@+id/dialpad_button_pound"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:alpha="0.60"
+            app:title_color="@color/text_color"
+            app:message_color="@color/text_color"
+            app:message=""
+            app:title="#"/>
+
+    </GridLayout>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
