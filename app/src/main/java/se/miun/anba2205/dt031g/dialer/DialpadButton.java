@@ -39,7 +39,7 @@ public class DialpadButton extends ConstraintLayout {
     // Initializes the view
     public void initialize(Context context, AttributeSet attrs) {
 
-        soundPlayer = new SoundPlayer(context);
+//        soundPlayer = new SoundPlayer(context);
         // Inflates the layout using binding
         DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
         title = binding.title;
@@ -90,7 +90,7 @@ public class DialpadButton extends ConstraintLayout {
             @Override
             public void onClick(View view) {
                 scaleAnimator.start();
-                soundPlayer.play(context);
+//                soundPlayer.play(context);
             }
         });
 
