@@ -22,36 +22,29 @@ public class Dialpad extends ConstraintLayout {
 
     public Dialpad(Context context) {
         super(context);
-        initialize(context, null);
+        initialize(context);
     }
 
     public Dialpad(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialize(context, attrs);
+        initialize(context);
     }
 
     public Dialpad(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initialize(context, attrs);
+        initialize(context);
     }
 
-    public void initialize(Context context, AttributeSet attrs) {
+    public void initialize(Context context) {
 
         LayoutInflater.from(context).inflate(R.layout.dialpad, this, true);
 
-        soundPlayer = new SoundPlayer(context);
-//        DialpadBinding binding = DialpadBinding.inflate(LayoutInflater.from(context), this, true);
-
-
-
-
+        DialpadButton dialpadButton = new DialpadButton(context);
+        dialpadButton.setSoundPlayer(new SoundPlayer(context));
 
     }
 
-    // Sets the SoundPlayer reference
-    public void setSoundPlayer(SoundPlayer soundPlayer) {
-        this.soundPlayer = soundPlayer;
-    }
+
 
 
 }

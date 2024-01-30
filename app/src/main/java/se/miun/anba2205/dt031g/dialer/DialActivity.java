@@ -7,44 +7,55 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.List;
 import java.util.Objects;
 
 public class DialActivity extends AppCompatActivity {
+
+    private SoundPlayer soundPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dial);
 
-        //    private enum Sound {ONE, TWO, THREE}
-        //    private Map<Sound, Integer> soundIds;
-        SoundPlayer soundPlayer = new SoundPlayer(this);
-
-        // Find your DialpadButton instance (replace R.id.your_dialpad_button_id with the actual ID)
         Dialpad dialpad = findViewById(R.id.dialpad);
+        dialpad.initialize(this);
+//        SoundPlayer soundPlayer = new SoundPlayer(this);
 
-        // Set the SoundPlayer reference in DialpadButton
-        dialpad.setSoundPlayer(soundPlayer);
+//        DialpadButton dialpadButton = findViewById(R.id.dialpad_button_1);
 
+//        dialpadButton.setSoundPlayer(soundPlayer);
 
 
         // Change of the color of the action bar
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
 
-
+//        List<DialpadButton> dialButtons = dialpad.getDialButtons();
+//        for (DialpadButton btn : dialButtons) {
+//            soundPlayer.addDependencies(btn);
+//            btn.setOnClickedListener(new DialpadButton.OnClickedListener() {
+//                @Override
+//                public void onClick(DialpadButton button) {
+//                    input.setText(new StringBuilder()
+//                            .append(input.getText())
+//                            .append(button.getTitle())
+//                            .toString());
+//                }
+//            });
+//        }
 
 
     }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//
-//        SoundPlayer soundPlayer2 = new SoundPlayer(this);
-//        if (soundPlayer2 != null) {
-//            soundPlayer2.destroy();
-//        }
-//    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        soundPlayer.destroy();
+
+
+
+
+    }
 }

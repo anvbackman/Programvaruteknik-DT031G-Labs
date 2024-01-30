@@ -21,7 +21,6 @@ public class DialpadButton extends ConstraintLayout {
     private TextView message;
     private SoundPlayer soundPlayer;
 
-
     public DialpadButton(Context context) {
         super(context);
         initialize(context, null);
@@ -41,8 +40,6 @@ public class DialpadButton extends ConstraintLayout {
     public void initialize(Context context, AttributeSet attrs) {
 
         soundPlayer = new SoundPlayer(context);
-//        soundPlayer.setDialpadButton(this);
-
 
         // Inflates the layout using binding
         DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
@@ -139,19 +136,15 @@ public class DialpadButton extends ConstraintLayout {
 
                     }
                 }
-
-
             }
         });
-
-
     }
-
 
 
     // Setter method for SoundPlayer
     public void setSoundPlayer(SoundPlayer soundPlayer) {
         this.soundPlayer = soundPlayer;
+        Log.d("Soundplayer", "Soundplayer set");
     }
 
     // Sets the title text and makes sure that only the first character will show
@@ -164,9 +157,10 @@ public class DialpadButton extends ConstraintLayout {
     // Sets the message text and makes sure that only the first 3 characters will show
     public void setMessage(String messageText) {
         if (messageText != null && !messageText.isEmpty()) {
-            message.setText(messageText.substring(0, Math.min(3, messageText.length())));
+            message.setText(messageText.substring(0, Math.min(4, messageText.length())));
         }
     }
+
 }
 
 
