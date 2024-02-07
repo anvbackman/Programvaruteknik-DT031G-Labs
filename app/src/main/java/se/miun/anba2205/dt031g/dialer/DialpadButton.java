@@ -86,19 +86,18 @@ public class DialpadButton extends ConstraintLayout {
         scaleAnimator.setDuration(100);
         scaleAnimator.setInterpolator(new LinearInterpolator());
 
-        // Sets the onClickListener on the root which triggers the ObjectAnimator
+        // Sets the onClickListener which triggers the ObjectAnimator
         binding.getRoot().setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 scaleAnimator.start();
 
-                if (soundPlayer != null) {
+                if (soundPlayer != null && title != null) {
                     String titleText = title.getText().toString();
-
+                    // Switches between sounds based on which button is clicked
                     switch (titleText) {
                         case "1":
                             soundPlayer.playSound(SoundPlayer.Sound.ONE);
-                            Log.d("---", SoundPlayer.Sound.ONE.toString());
                             break;
                         case "2":
                             soundPlayer.playSound(SoundPlayer.Sound.TWO);
@@ -140,11 +139,9 @@ public class DialpadButton extends ConstraintLayout {
         });
     }
 
-
     // Setter method for SoundPlayer
     public void setSoundPlayer(SoundPlayer soundPlayer) {
         this.soundPlayer = soundPlayer;
-        Log.d("Soundplayer", "Soundplayer set");
     }
 
     // Sets the title text and makes sure that only the first character will show
@@ -160,7 +157,6 @@ public class DialpadButton extends ConstraintLayout {
             message.setText(messageText.substring(0, Math.min(4, messageText.length())));
         }
     }
-
 }
 
 

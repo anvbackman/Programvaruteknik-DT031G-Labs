@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                if (!isAboutUsed) {
+                if (!isAboutUsed) { // Checks if about has been used before
                     String aboutText = getString(R.string.about_text);
                     builder.setMessage(aboutText)
                             .setTitle("About");
@@ -90,12 +90,9 @@ public class MainActivity extends AppCompatActivity {
                     dialog.show();
 
                 }
-                else {
+                else { // Dialog to show if the about function has already been used
                     Toast.makeText(MainActivity.this, "About dialog can only be shown once!", Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
         });
     }
