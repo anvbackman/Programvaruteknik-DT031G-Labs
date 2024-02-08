@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Objects;
@@ -39,4 +40,13 @@ public class SettingsActivity extends AppCompatActivity {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
         }
     }
+
+//    public boolean onPreferenceTreeClick(Preference preference) {
+//        String key = preference.getKey();
+//
+//        if ("stored_numbers".equals(key)) {
+//            callList.deleteStoredNumbers();
+//            return true;
+//        }
+//    }
 }

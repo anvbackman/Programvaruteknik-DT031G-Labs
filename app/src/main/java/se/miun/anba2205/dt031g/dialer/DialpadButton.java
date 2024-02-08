@@ -157,6 +157,7 @@ public class DialpadButton extends ConstraintLayout {
             message.setText(messageText.substring(0, Math.min(4, messageText.length())));
         }
     }
+
 }
 
 

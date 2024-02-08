@@ -3,9 +3,14 @@ package se.miun.anba2205.dt031g.dialer;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Dialpad extends ConstraintLayout {
+
+    private TextView numberEntered;
 
     public Dialpad(Context context) {
         super(context);
@@ -28,5 +33,9 @@ public class Dialpad extends ConstraintLayout {
         // Create a DialpadButton and sets the soundplayer
         DialpadButton dialpadButton = new DialpadButton(context);
         dialpadButton.setSoundPlayer(new SoundPlayer(context));
+
+        numberEntered = findViewById(R.id.number_entered);
     }
+
+
 }

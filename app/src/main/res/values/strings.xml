@@ -4,6 +4,7 @@
     <string name="dial_text">This is the Dial activity</string>
 
     <string name="call_list_text">This is the Call List activity</string>
+    <string name="empty_call_list"></string>
 
     <string name="welcome_message">What would you like to do?</string>
 

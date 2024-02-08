@@ -2,8 +2,13 @@ package se.miun.anba2205.dt031g.dialer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import java.util.Objects;
 
 public class DialActivity extends AppCompatActivity {
@@ -30,4 +35,30 @@ public class DialActivity extends AppCompatActivity {
             soundPlayer.destroy();
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.dial_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_bar_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+
+//            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+
+    private void updateText() {
+
+    }
+
+
 }
