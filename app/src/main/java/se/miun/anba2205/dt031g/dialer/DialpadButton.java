@@ -4,10 +4,13 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
@@ -20,6 +23,9 @@ public class DialpadButton extends ConstraintLayout {
     private TextView title;
     private TextView message;
     private SoundPlayer soundPlayer;
+
+
+
 
     public DialpadButton(Context context) {
         super(context);
@@ -36,10 +42,22 @@ public class DialpadButton extends ConstraintLayout {
         initialize(context, attrs);
     }
 
+    public interface OnTextUpdateListener {
+        void onTextUpdate(DialpadButton dialpadButton);
+    }
+
+    private DialpadButton.OnTextUpdateListener listener;
+
+    public void setCustomClickListener(OnTextUpdateListener listener) {
+        this.listener = listener;
+    }
+
+
     // Initializes the view
     public void initialize(Context context, AttributeSet attrs) {
 
         soundPlayer = new SoundPlayer(context);
+        this.listener = null;
 
         // Inflates the layout using binding
         DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
@@ -73,70 +91,73 @@ public class DialpadButton extends ConstraintLayout {
         }
 
 
-        // Creates an ObjectAnimator used to scale the button
-        ObjectAnimator scaleAnimator = ObjectAnimator.ofPropertyValuesHolder(
-                this,
-                PropertyValuesHolder.ofFloat(View.SCALE_X, SCALE_UP),
-                PropertyValuesHolder.ofFloat(View.SCALE_Y, SCALE_UP)
-        );
 
-        // Sets initial settings for the ObjectAnimator
-        scaleAnimator.setRepeatCount(1);
-        scaleAnimator.setRepeatMode(ValueAnimator.REVERSE);
-        scaleAnimator.setDuration(100);
-        scaleAnimator.setInterpolator(new LinearInterpolator());
+
+
+//        Dialpad dialpad = new Dialpad(context);
 
         // Sets the onClickListener which triggers the ObjectAnimator
-        binding.getRoot().setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scaleAnimator.start();
+//        binding.getRoot().setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                scaleAnimator.start();
+//
+//                if (soundPlayer != null && title != null) {
+//                    String titleText = title.getText().toString();
+//
+//                    Log.d("Title: ", titleText);
 
-                if (soundPlayer != null && title != null) {
-                    String titleText = title.getText().toString();
+
+
+//                    soundPlayer.playSound(SoundPlayer.Sound.valueOf(titleText));
                     // Switches between sounds based on which button is clicked
-                    switch (titleText) {
-                        case "1":
-                            soundPlayer.playSound(SoundPlayer.Sound.ONE);
-                            break;
-                        case "2":
-                            soundPlayer.playSound(SoundPlayer.Sound.TWO);
-                            break;
-                        case "3":
-                            soundPlayer.playSound(SoundPlayer.Sound.THREE);
-                            break;
-                        case "4":
-                            soundPlayer.playSound(SoundPlayer.Sound.FOUR);
-                            break;
-                        case "5":
-                            soundPlayer.playSound(SoundPlayer.Sound.FIVE);
-                            break;
-                        case "6":
-                            soundPlayer.playSound(SoundPlayer.Sound.SIX);
-                            break;
-                        case "7":
-                            soundPlayer.playSound(SoundPlayer.Sound.SEVEN);
-                            break;
-                        case "8":
-                            soundPlayer.playSound(SoundPlayer.Sound.EIGHT);
-                            break;
-                        case "9":
-                            soundPlayer.playSound(SoundPlayer.Sound.NINE);
-                            break;
-                        case "0":
-                            soundPlayer.playSound(SoundPlayer.Sound.ZERO);
-                            break;
-                        case "*":
-                            soundPlayer.playSound(SoundPlayer.Sound.STAR);
-                            break;
-                        case "#":
-                            soundPlayer.playSound(SoundPlayer.Sound.POUND);
-                            break;
 
-                    }
-                }
-            }
-        });
+
+
+
+//                    switch (titleText) {
+//                        case "1":
+//                            soundPlayer.playSound("1");
+//                            break;
+//                        case "2":
+//                            soundPlayer.playSound(SoundPlayer.Sound.TWO);
+//                            break;
+//                        case "3":
+//                            soundPlayer.playSound(SoundPlayer.Sound.THREE);
+//                            break;
+//                        case "4":
+//                            soundPlayer.playSound(SoundPlayer.Sound.FOUR);
+//                            break;
+//                        case "5":
+//                            soundPlayer.playSound(SoundPlayer.Sound.FIVE);
+//                            break;
+//                        case "6":
+//                            soundPlayer.playSound(SoundPlayer.Sound.SIX);
+//                            break;
+//                        case "7":
+//                            soundPlayer.playSound(SoundPlayer.Sound.SEVEN);
+//                            break;
+//                        case "8":
+//                            soundPlayer.playSound(SoundPlayer.Sound.EIGHT);
+//                            break;
+//                        case "9":
+//                            soundPlayer.playSound(SoundPlayer.Sound.NINE);
+//                            break;
+//                        case "0":
+//                            soundPlayer.playSound(SoundPlayer.Sound.ZERO);
+//                            break;
+//                        case "*":
+//                            soundPlayer.playSound(SoundPlayer.Sound.STAR);
+//                            break;
+//                        case "#":
+//                            soundPlayer.playSound(SoundPlayer.Sound.POUND);
+//                            break;
+
+//                    }
+
+//                }
+//            }
+//        });
     }
 
     // Setter method for SoundPlayer
@@ -156,6 +177,51 @@ public class DialpadButton extends ConstraintLayout {
         if (messageText != null && !messageText.isEmpty()) {
             message.setText(messageText.substring(0, Math.min(4, messageText.length())));
         }
+    }
+
+    public String getTitleText() {
+        return title.getText().toString();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (listener != null) {
+                    this.listener.onTextUpdate(this);
+                }
+                animateButton();
+                Log.d("Current title", getTitleText());
+//                SoundPlayer.getInstance(this.getContext().getApplicationContext()).playSound(this);
+//                if (isAnimationActivated) {
+//                    animateBtnDown();
+//                }
+                break;
+            case MotionEvent.ACTION_UP:
+//                if (isAnimationActivated) {
+//                    animateBtnUp();
+//                }
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+    private void animateButton() {
+        // Creates an ObjectAnimator used to scale the button
+        ObjectAnimator scaleAnimator = ObjectAnimator.ofPropertyValuesHolder(
+                this,
+                PropertyValuesHolder.ofFloat(View.SCALE_X, SCALE_UP),
+                PropertyValuesHolder.ofFloat(View.SCALE_Y, SCALE_UP)
+        );
+
+        // Sets initial settings for the ObjectAnimator
+        scaleAnimator.setRepeatCount(1);
+        scaleAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        scaleAnimator.setDuration(100);
+        scaleAnimator.setInterpolator(new LinearInterpolator());
+        scaleAnimator.start();
     }
 
 }

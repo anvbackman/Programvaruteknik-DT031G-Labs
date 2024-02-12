@@ -2,13 +2,21 @@ package se.miun.anba2205.dt031g.dialer;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.preference.PreferenceManager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,6 +30,14 @@ public class CallListActivity extends AppCompatActivity {
         // Change of the color of the action bar
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
+
+
+
+
+
+//        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+
+
     }
 
     @Override
@@ -42,6 +58,26 @@ public class CallListActivity extends AppCompatActivity {
         else {
             textView.setText(R.string.empty_call_list);
         }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.call_list_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.call_list_settings) {
+//            startActivity(new Intent(this, SettingsActivity.class));
+
+//            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
 
     }
 

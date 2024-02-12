@@ -45,11 +45,13 @@ public class DialActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_bar_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, SettingsActivity.class));
 
 //            finish();
             return true;
+        }
+        else if (item.getItemId() == R.id.call_list_settings) {
+
         }
         return super.onOptionsItemSelected(item);
 

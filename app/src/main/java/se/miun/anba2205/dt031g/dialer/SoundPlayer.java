@@ -3,6 +3,8 @@ package se.miun.anba2205.dt031g.dialer;
 import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +13,8 @@ public class SoundPlayer {
     enum Sound {
         ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, ZERO, STAR, POUND
     }
+
+    private Context context;
     private SoundPool soundPool;
     private Map<Sound, Integer> soundIds;
 
@@ -24,6 +28,7 @@ public class SoundPlayer {
                             setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                             .build())
                     .build();
+
 
             // Loads the sound files to the map
             soundIds.put(Sound.ONE, soundPool.load(context, R.raw.one, 1));
@@ -41,10 +46,14 @@ public class SoundPlayer {
         }
     }
 
-    public void playSound(Sound soundIndex) {
-        // Plays the specified sound
-        soundPool.play(soundIds.get(soundIndex), 1f, 1f, 1, 0, 1f);
-    }
+//    public void playSound(Sound soundIndex) {
+//        // Plays the specified sound
+//
+//
+//        if (soundIndex != null) {
+//            soundPool.play(soundIds.get(soundIndex), 1f, 1f, 1, 0, 1f);
+//        }
+//    }
 
     public void destroy() {
         if (soundPool != null) {

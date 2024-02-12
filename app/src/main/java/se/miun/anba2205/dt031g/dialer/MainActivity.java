@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private boolean isAboutUsed = false;
+    private boolean isSoundCopied = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         // Change of the color of the action bar
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
+
+//        copySound();
 
         // Starts the Dial
         Button startDial = findViewById(R.id.DIAL);
@@ -108,4 +112,23 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         isAboutUsed = savedInstanceState.getBoolean("about_dialog_state");
     }
+
+//    private void copySound() {
+//
+//
+//        if (!Util.defaultVoiceExist(this)) {
+//
+//            boolean copied = Util.copyDefaultVoiceToInternalStorage(this);
+//
+//            if (copied) {
+//                Toast.makeText(this, "Files Copied.", Toast.LENGTH_SHORT).show();
+//                isSoundCopied = true;
+//            }
+//            else {
+//                Toast.makeText(this, "Failed to copy default voice files.", Toast.LENGTH_SHORT).show();
+//            }
+//
+//
+//        }
+//    }
 }

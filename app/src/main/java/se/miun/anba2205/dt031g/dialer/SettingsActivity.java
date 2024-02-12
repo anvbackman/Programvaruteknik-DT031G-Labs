@@ -41,6 +41,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    public void testing() {}
+
 //    public boolean onPreferenceTreeClick(Preference preference) {
 //        String key = preference.getKey();
 //

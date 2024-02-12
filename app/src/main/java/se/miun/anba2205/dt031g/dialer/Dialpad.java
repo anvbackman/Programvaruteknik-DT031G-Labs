@@ -1,16 +1,37 @@
 package se.miun.anba2205.dt031g.dialer;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceManager;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Dialpad extends ConstraintLayout {
 
     private TextView numberEntered;
+    private DialpadButton dialpadButtonOne;
+    private DialpadButton dialpadButtonTwo;
+    private DialpadButton dialpadButtonThree;
+    private DialpadButton dialpadButtonFour;
+    private DialpadButton dialpadButtonFive;
+    private DialpadButton dialpadButtonSix;
+    private DialpadButton dialpadButtonSeven;
+    private DialpadButton dialpadButtonEight;
+    private DialpadButton dialpadButtonNine;
+    private DialpadButton dialpadButtonZero;
+    private DialpadButton dialpadButtonPound;
+    private DialpadButton dialpadButtonStar;
+    private String inputText;
+
 
     public Dialpad(Context context) {
         super(context);
@@ -31,11 +52,76 @@ public class Dialpad extends ConstraintLayout {
         // Inflates the layout resource into the Dialpad instance
         LayoutInflater.from(context).inflate(R.layout.dialpad, this, true);
         // Create a DialpadButton and sets the soundplayer
-        DialpadButton dialpadButton = new DialpadButton(context);
-        dialpadButton.setSoundPlayer(new SoundPlayer(context));
+//        dialpadButton = new DialpadButton(context);
+//        dialpadButton.setSoundPlayer(new SoundPlayer(context));
 
         numberEntered = findViewById(R.id.number_entered);
+
+        dialpadButtonOne = findViewById(R.id.dialpad_button_1);
+        dialpadButtonTwo = findViewById(R.id.dialpad_button_2);
+        dialpadButtonThree = findViewById(R.id.dialpad_button_3);
+        dialpadButtonFour = findViewById(R.id.dialpad_button_4);
+        dialpadButtonFive = findViewById(R.id.dialpad_button_5);
+        dialpadButtonSix = findViewById(R.id.dialpad_button_6);
+        dialpadButtonSeven = findViewById(R.id.dialpad_button_7);
+        dialpadButtonEight = findViewById(R.id.dialpad_button_8);
+        dialpadButtonNine = findViewById(R.id.dialpad_button_9);
+        dialpadButtonStar = findViewById(R.id.dialpad_button_star);
+        dialpadButtonZero = findViewById(R.id.dialpad_button_0);
+        dialpadButtonPound = findViewById(R.id.dialpad_button_pound);
+
+
+        setButtonOnClickListener();
+
+//        dialpadButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String buttonTitle = dialpadButton.getTitleText().toString();
+//                Log.d("Button clicked", buttonTitle);
+//                appendNumberEntered(buttonTitle);
+//            }
+//        });
+    }
+
+    public void appendNumberEntered(String text) {
+//        String currentText = text;
+//        numberEntered.setText(currentText + text);
+//        Log.d("Appended", currentText);
+        Log.d("Dialpad", "Appending text: " + text);
+        String currentText = numberEntered.getText().toString();
+        numberEntered.setText(currentText + text);
     }
 
 
+
+
+    private void setButtonOnClickListener() {
+//        for (DialpadButton dialpadButton : getButtons()) {
+//
+//        }
+        if (dialpadButtonOne != null) {
+            dialpadButtonOne.setCustomClickListener(new DialpadButton.OnTextUpdateListener() {
+                @Override
+                public void onTextUpdate(DialpadButton dialpadButton) {
+                    Log.d("Button", "Clicked");
+                    inputText += dialpadButton.getTitleText();
+//                numberEntered.setText("test");
+                    appendNumberEntered(inputText);
+
+                }
+            });
+        }
+
+    }
+
+    private void setClickListener() {
+
+    }
+
+
+    private List<DialpadButton> getButtons() {
+        return Arrays.asList(dialpadButtonOne, dialpadButtonTwo, dialpadButtonThree, dialpadButtonFour, dialpadButtonFive,
+                dialpadButtonSix, dialpadButtonSeven, dialpadButtonEight, dialpadButtonNine, dialpadButtonZero,
+                dialpadButtonPound, dialpadButtonStar);
+    }
 }
