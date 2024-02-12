@@ -30,7 +30,7 @@ public class Dialpad extends ConstraintLayout {
     private DialpadButton dialpadButtonZero;
     private DialpadButton dialpadButtonPound;
     private DialpadButton dialpadButtonStar;
-    private String inputText;
+    private String inputText = "";
 
 
     public Dialpad(Context context) {
@@ -55,7 +55,11 @@ public class Dialpad extends ConstraintLayout {
 //        dialpadButton = new DialpadButton(context);
 //        dialpadButton.setSoundPlayer(new SoundPlayer(context));
 
+        Log.d("Dialpad", "Dialpad initialized");
+
+        // Create a DialpadButton and sets the sound player
         numberEntered = findViewById(R.id.number_entered);
+        Log.d("Dialpad", "Number Entered TextView initialized");
 
         dialpadButtonOne = findViewById(R.id.dialpad_button_1);
         dialpadButtonTwo = findViewById(R.id.dialpad_button_2);
@@ -70,8 +74,18 @@ public class Dialpad extends ConstraintLayout {
         dialpadButtonZero = findViewById(R.id.dialpad_button_0);
         dialpadButtonPound = findViewById(R.id.dialpad_button_pound);
 
+        if (dialpadButtonOne != null) {
+            Log.d("Dialpad", "Button One initialized");
+        }
+
 
         setButtonOnClickListener();
+
+
+
+
+
+//        setButtonOnClickListener();
 
 //        dialpadButton.setOnClickListener(new OnClickListener() {
 //            @Override
@@ -83,36 +97,50 @@ public class Dialpad extends ConstraintLayout {
 //        });
     }
 
-    public void appendNumberEntered(String text) {
+//    public void appendNumberEntered(String text) {
+//
+//        Log.d("Dialpad", "Appending text: " + text);
 //        String currentText = text;
 //        numberEntered.setText(currentText + text);
-//        Log.d("Appended", currentText);
-        Log.d("Dialpad", "Appending text: " + text);
-        String currentText = numberEntered.getText().toString();
-        numberEntered.setText(currentText + text);
-    }
+//    }
 
 
 
 
     private void setButtonOnClickListener() {
+
+        for (DialpadButton dialpadButton : getButtons()) {
+            dialpadButton.setCustomClickListener(new DialpadButton.OnTextUpdateListener() {
+
+                @Override
+                public void onTextUpdate(DialpadButton dialpadButton) {
+                    System.out.println(dialpadButton);
+                    Log.d("Click", "Motherfukka");
+                    System.out.println("********************aadsadsad**************");
+                    inputText += dialpadButton.getTitleText();
+                    numberEntered.setText(inputText);
+//                appendNumberEntered(inputText);
+                }
+            });
+
+        }
 //        for (DialpadButton dialpadButton : getButtons()) {
 //
 //        }
-        if (dialpadButtonOne != null) {
-            dialpadButtonOne.setCustomClickListener(new DialpadButton.OnTextUpdateListener() {
-                @Override
-                public void onTextUpdate(DialpadButton dialpadButton) {
-                    Log.d("Button", "Clicked");
-                    inputText += dialpadButton.getTitleText();
+//        dialpadButtonOne.setCustomClickListener(new DialpadButton.OnTextUpdateListener() {
+//            @Override
+//            public void onTextUpdate(DialpadButton dialpadButton) {
+//                Log.d("Button", "Clicked");
+//                inputText += dialpadButton.getTitleText();
 //                numberEntered.setText("test");
-                    appendNumberEntered(inputText);
-
-                }
-            });
-        }
+//                appendNumberEntered(inputText);
+//
+//            }
+//        });
 
     }
+
+    
 
     private void setClickListener() {
 

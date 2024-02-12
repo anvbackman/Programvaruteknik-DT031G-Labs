@@ -23,32 +23,36 @@ public class DialpadButton extends ConstraintLayout {
     private TextView title;
     private TextView message;
     private SoundPlayer soundPlayer;
-
+    private OnTextUpdateListener listener;
 
 
 
     public DialpadButton(Context context) {
         super(context);
         initialize(context, null);
+
     }
 
     public DialpadButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize(context, attrs);
+
     }
 
     public DialpadButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initialize(context, attrs);
+
     }
 
     public interface OnTextUpdateListener {
         void onTextUpdate(DialpadButton dialpadButton);
     }
 
-    private DialpadButton.OnTextUpdateListener listener;
+
 
     public void setCustomClickListener(OnTextUpdateListener listener) {
+        System.out.println("LISTENER: "+listener);
         this.listener = listener;
     }
 
@@ -57,12 +61,16 @@ public class DialpadButton extends ConstraintLayout {
     public void initialize(Context context, AttributeSet attrs) {
 
         soundPlayer = new SoundPlayer(context);
-        this.listener = null;
+//        this.listener = null;
 
         // Inflates the layout using binding
-        DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
-        title = binding.title;
-        message = binding.message;
+//        DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
+//        title = binding.title;
+//        message = binding.message;
+
+        inflate(getContext(), R.layout.dialpad_button, this);
+        title = findViewById(R.id.title);
+        message = findViewById(R.id.message);
 
         // Handles attributes from XML
         if (attrs != null) {
@@ -88,6 +96,8 @@ public class DialpadButton extends ConstraintLayout {
             } finally {
                 typedArray.recycle();
             }
+
+
         }
 
 
@@ -188,8 +198,11 @@ public class DialpadButton extends ConstraintLayout {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (listener != null) {
-                    this.listener.onTextUpdate(this);
+                    listener.onTextUpdate(this);
+
                 }
+
+                System.out.println("####################jjjjjj##################");
                 animateButton();
                 Log.d("Current title", getTitleText());
 //                SoundPlayer.getInstance(this.getContext().getApplicationContext()).playSound(this);

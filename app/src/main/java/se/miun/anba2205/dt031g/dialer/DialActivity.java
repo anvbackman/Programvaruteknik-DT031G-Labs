@@ -6,6 +6,7 @@ import androidx.core.content.res.ResourcesCompat;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,8 +21,10 @@ public class DialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dial);
 
-        Dialpad dialpad = findViewById(R.id.dialpad);
-        dialpad.initialize(this);
+        Log.d("DialActivity", "Activity Dial Layout Inflated");
+
+//        Dialpad dialpad = findViewById(R.id.dialpad);
+//        dialpad.initialize(this);
 
         // Change of the color of the action bar
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
