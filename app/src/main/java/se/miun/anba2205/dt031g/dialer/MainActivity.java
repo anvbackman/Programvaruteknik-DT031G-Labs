@@ -113,22 +113,22 @@ public class MainActivity extends AppCompatActivity {
         isAboutUsed = savedInstanceState.getBoolean("about_dialog_state");
     }
 
-//    private void copySound() {
-//
-//
-//        if (!Util.defaultVoiceExist(this)) {
-//
-//            boolean copied = Util.copyDefaultVoiceToInternalStorage(this);
-//
-//            if (copied) {
-//                Toast.makeText(this, "Files Copied.", Toast.LENGTH_SHORT).show();
-//                isSoundCopied = true;
-//            }
-//            else {
-//                Toast.makeText(this, "Failed to copy default voice files.", Toast.LENGTH_SHORT).show();
-//            }
-//
-//
-//        }
-//    }
+    private void copySound() {
+
+
+        if (!Util.defaultVoiceExist(this)) {
+
+            boolean copied = Util.copyDefaultVoiceToInternalStorage(this);
+
+            if (copied) {
+                Toast.makeText(this, "Files Copied.", Toast.LENGTH_SHORT).show();
+                isSoundCopied = true;
+            }
+            else {
+                Toast.makeText(this, "Failed to copy default voice files.", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+    }
 }

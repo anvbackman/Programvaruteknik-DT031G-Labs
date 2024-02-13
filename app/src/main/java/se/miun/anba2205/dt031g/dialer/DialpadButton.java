@@ -201,19 +201,17 @@ public class DialpadButton extends ConstraintLayout {
                     listener.onTextUpdate(this);
 
                 }
+                soundPlayer.playSound(this);
 
-                System.out.println("####################jjjjjj##################");
                 animateButton();
-                Log.d("Current title", getTitleText());
+
 //                SoundPlayer.getInstance(this.getContext().getApplicationContext()).playSound(this);
 //                if (isAnimationActivated) {
 //                    animateBtnDown();
 //                }
                 break;
             case MotionEvent.ACTION_UP:
-//                if (isAnimationActivated) {
-//                    animateBtnUp();
-//                }
+
                 break;
             default:
                 return false;
