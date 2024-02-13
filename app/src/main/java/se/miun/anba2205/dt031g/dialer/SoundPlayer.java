@@ -17,6 +17,7 @@ public class SoundPlayer {
     private Context context;
     private SoundPool soundPool;
     private Map<String, Integer> soundIds;
+    private String test;
 
 
 
@@ -66,6 +67,10 @@ public class SoundPlayer {
                 // Check if keyIndex is a valid index in Util.DEFAULT_VOICE_RESOURCE_IDS
                 if (keyIndex >= 0 && keyIndex < Util.DEFAULT_VOICE_RESOURCE_IDS.length) {
                     int resourceId = Util.DEFAULT_VOICE_RESOURCE_IDS[keyIndex];
+
+
+
+
                     int soundId = soundPool.load(context, resourceId, 1);
                     soundIds.put(soundKey, soundId);
                     System.out.println("Soundkey: " + soundKey);
@@ -78,6 +83,10 @@ public class SoundPlayer {
         }
     }
 
+
+
+
+
     public void playSound(DialpadButton dialpadButton) {
         // Plays the specified sound
         String buttonTitle = dialpadButton.getTitleText();
@@ -85,6 +94,7 @@ public class SoundPlayer {
 
         System.out.println("Key passed: " + buttonTitle);
         System.out.println("Value passed: " + soundId);
+
 
         if (soundId != null) {
             soundPool.play(soundId, 1f, 1f, 1, 0, 1f);

@@ -209,6 +209,14 @@ public class Util {
      */
     public static boolean defaultVoiceExist(Context context) {
 		// TODO: Add check if default voice dir already exist in the internal app storage
-        return false;
+        File defaultDir = getDirForDefaultVoice(context);
+        if (defaultDir.exists() && defaultDir.isDirectory()) {
+            System.out.println("defultDir exists");
+            return true;
+        }
+        else {
+            System.out.println("defultDir does not exist");
+            return false;
+        }
     }
 }

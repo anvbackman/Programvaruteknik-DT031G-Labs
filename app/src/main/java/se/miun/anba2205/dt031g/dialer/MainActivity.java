@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
 
-//        copySound();
+        copySound();
 
         // Starts the Dial
         Button startDial = findViewById(R.id.DIAL);
@@ -102,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        copySound();
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean("about_dialog_state", isAboutUsed);
@@ -114,18 +121,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void copySound() {
-
-
         if (!Util.defaultVoiceExist(this)) {
-
             boolean copied = Util.copyDefaultVoiceToInternalStorage(this);
 
             if (copied) {
                 Toast.makeText(this, "Files Copied.", Toast.LENGTH_SHORT).show();
-                isSoundCopied = true;
+//                isSoundCopied = true;
+                System.out.println("copied and changed to true");
+                Log.d("Copy: ", "siiiiii");
             }
             else {
                 Toast.makeText(this, "Failed to copy default voice files.", Toast.LENGTH_SHORT).show();
+                System.out.println("Not copied");
+                Log.d("Copy: ", "nein");
+//                isSoundCopied = false;
             }
 
 

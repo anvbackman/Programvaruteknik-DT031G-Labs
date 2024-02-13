@@ -131,19 +131,7 @@ public class Dialpad extends ConstraintLayout {
             });
 
         }
-//        for (DialpadButton dialpadButton : getButtons()) {
-//
-//        }
-//        dialpadButtonOne.setCustomClickListener(new DialpadButton.OnTextUpdateListener() {
-//            @Override
-//            public void onTextUpdate(DialpadButton dialpadButton) {
-//                Log.d("Button", "Clicked");
-//                inputText += dialpadButton.getTitleText();
-//                numberEntered.setText("test");
-//                appendNumberEntered(inputText);
-//
-//            }
-//        });
+
 
     }
 
@@ -160,13 +148,11 @@ public class Dialpad extends ConstraintLayout {
                 }
             }
         });
-
-
     }
 
+    // Method used to clear the number shown when holding down the backspace button
     private void setLongClickListener() {
         Button backspaceButton = findViewById(R.id.clear_button);
-
         backspaceButton.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -185,33 +171,26 @@ public class Dialpad extends ConstraintLayout {
             public void onClick(View view) {
 
                 if (!inputText.isEmpty()) {
-
-
+                    // Used to store number
                     Intent intentCallList = new Intent(getContext(), CallListActivity.class);
                     intentCallList.putExtra("newNumber", inputText);
                     getContext().startActivity(intentCallList);
 
-                    String encodedNumber = Uri.encode(inputText);
+                    String encodedNumber = Uri.encode(inputText); // Encodes the number to allow "#"
+
+                    // Starts a new intent for the call
                     Intent intent = new Intent(Intent.ACTION_DIAL);
                     intent.setData(Uri.parse("tel: " + encodedNumber));
-                    System.out.println("Call");
                     getContext().startActivity(intent);
-                    System.out.println("Initiating call to: " + inputText);
-
                 }
-
             }
         });
     }
 
-
+    // Returns all buttons as List
     private List<DialpadButton> getButtons() {
         return Arrays.asList(dialpadButtonOne, dialpadButtonTwo, dialpadButtonThree, dialpadButtonFour, dialpadButtonFive,
                 dialpadButtonSix, dialpadButtonSeven, dialpadButtonEight, dialpadButtonNine, dialpadButtonZero,
                 dialpadButtonPound, dialpadButtonStar);
-    }
-
-    public String getInputText() {
-        return inputText;
     }
 }
