@@ -2,19 +2,13 @@ package se.miun.anba2205.dt031g.dialer;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.preference.PreferenceManager;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +29,6 @@ public class Dialpad extends ConstraintLayout {
     private DialpadButton dialpadButtonStar;
     private String inputText = "";
 
-
     public Dialpad(Context context) {
         super(context);
         initialize(context);
@@ -54,16 +47,11 @@ public class Dialpad extends ConstraintLayout {
     public void initialize(Context context) {
         // Inflates the layout resource into the Dialpad instance
         LayoutInflater.from(context).inflate(R.layout.dialpad, this, true);
-        // Create a DialpadButton and sets the soundplayer
-//        dialpadButton = new DialpadButton(context);
-//        dialpadButton.setSoundPlayer(new SoundPlayer(context));
 
-        Log.d("Dialpad", "Dialpad initialized");
-
-        // Create a DialpadButton and sets the sound player
+        // Retrieves the TextView
         numberEntered = findViewById(R.id.number_entered);
-        Log.d("Dialpad", "Number Entered TextView initialized");
 
+        // Initialize the buttons
         dialpadButtonOne = findViewById(R.id.dialpad_button_1);
         dialpadButtonTwo = findViewById(R.id.dialpad_button_2);
         dialpadButtonThree = findViewById(R.id.dialpad_button_3);
@@ -77,73 +65,34 @@ public class Dialpad extends ConstraintLayout {
         dialpadButtonZero = findViewById(R.id.dialpad_button_0);
         dialpadButtonPound = findViewById(R.id.dialpad_button_pound);
 
-
-        if (dialpadButtonOne != null) {
-            Log.d("Dialpad", "Button One initialized");
-        }
-
-
+        // Calls relevant methods
         setButtonOnClickListener();
         setBackspaceListener();
         setLongClickListener();
         callNumber();
-
-
-
-
-
-//        setButtonOnClickListener();
-
-//        dialpadButton.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String buttonTitle = dialpadButton.getTitleText().toString();
-//                Log.d("Button clicked", buttonTitle);
-//                appendNumberEntered(buttonTitle);
-//            }
-//        });
     }
 
-//    public void appendNumberEntered(String text) {
-//
-//        Log.d("Dialpad", "Appending text: " + text);
-//        String currentText = text;
-//        numberEntered.setText(currentText + text);
-//    }
-
-
-
-
+    // Method to set click listener on all buttons and add the digit to the TextView
     private void setButtonOnClickListener() {
-
         for (DialpadButton dialpadButton : getButtons()) {
             dialpadButton.setCustomClickListener(new DialpadButton.OnTextUpdateListener() {
-
                 @Override
                 public void onTextUpdate(DialpadButton dialpadButton) {
-                    System.out.println(dialpadButton);
-                    Log.d("Click", "Motherfukka");
-                    System.out.println("********************aadsadsad**************");
                     inputText += dialpadButton.getTitleText();
                     numberEntered.setText(inputText);
-//                appendNumberEntered(inputText);
                 }
             });
-
         }
-
-
     }
 
+    // Method to remove last digit when backspace button is clicked
     private void setBackspaceListener() {
         Button backspaceButton = findViewById(R.id.clear_button);
-
         backspaceButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!inputText.isEmpty()) {
                     inputText = inputText.substring(0, inputText.length() - 1);
-                    System.out.println("AAAAAAAAAAAAa");
                     numberEntered.setText(inputText);
                 }
             }

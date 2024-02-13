@@ -48,6 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
             Preference deletePreference = findPreference("stored_numbers");
             SwitchPreferenceCompat switchPreference = findPreference("switch");
 
+            // Preference click listener for removing all saved numbers from call list
             deletePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
@@ -56,6 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
+            // Preference change listener for if numbers should be saved or not
             switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
@@ -67,39 +69,24 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    // Method to delete numbers from SharedPreferences
     private static void deleteStoredNumbers(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        // Gets the saved numbers and clears them
         Set<String> calledNumbers = sharedPreferences.getStringSet("call_list_textView", new HashSet<>());
         calledNumbers.clear();
-
+        // Then puts the cleared numbers back into the textView
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putStringSet("call_list_textView", calledNumbers);
         editor.apply();
     }
 
+    // Method to update SharedPreference for saving numbers
     private static void updateNumber(Context context, boolean isSave) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("switch", isSave);
         editor.apply();
     }
-
-
-
-//
-//
-//        return sharedPreferences.getBoolean();
-
-
-
-
-//    public boolean onPreferenceTreeClick(Preference preference) {
-//        String key = preference.getKey();
-//
-//        if ("stored_numbers".equals(key)) {
-//            callList.deleteStoredNumbers();
-//            return true;
-//        }
-//    }
 }

@@ -1,14 +1,10 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
     <SwitchPreferenceCompat
         app:key="switch"
         app:title="Store numbers"
         app:summaryOn="Dialed telephone numbers are stored so they can be viewed later"
         app:summaryOff="Dialed telephone numbers are not stored"
-
-
         />
 
     <Preference
@@ -17,6 +13,4 @@
         app:summary="Delete stored telephone numbers from storage"
         app:icon="@drawable/baseline_delete_forever_24"
         />
-
-
 </PreferenceScreen>

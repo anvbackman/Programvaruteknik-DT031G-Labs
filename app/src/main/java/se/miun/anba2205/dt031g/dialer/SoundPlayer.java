@@ -4,23 +4,14 @@ import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class SoundPlayer {
 
-//    enum Sound {
-//        ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, ZERO, STAR, POUND
-//    }
-
     private Context context;
     private SoundPool soundPool;
     private Map<String, Integer> soundIds;
-    private String test;
-
-
-
 
     public SoundPlayer(Context context) {
         this.context = context;
@@ -28,103 +19,64 @@ public class SoundPlayer {
 
         if (soundPool == null) {
 
-            System.out.println("Soundpool null in constructor");
+            // Building soundpool
             soundPool = new SoundPool.Builder().setMaxStreams(3).setAudioAttributes(new AudioAttributes.Builder().
                             setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                             .build())
                     .build();
-            System.out.println("Soundpool created");
-            System.out.println("Context not null");
 
             loadSounds();
-
-
-
         }
     }
 
+    // Method to load sound
     public void loadSounds() {
         for (Map.Entry<String, String> entry : Util.DEFAULT_VOICE_FILE_NAMES.entrySet()) {
             String soundKey = entry.getKey();
-//            String soundValue = entry.getValue();
-            System.out.println("Soundkey: " + soundKey);
-            try {
-                // Attempt to parse soundKey as an integer
-                int keyIndex;
-                if (soundKey.equals("*")) {
-                    keyIndex = 10;
-                }
-                else if (soundKey.equals("#")) {
-                    keyIndex = 11;
-                }
-                else {
-                    keyIndex = Integer.parseInt(soundKey);
-                }
+            int keyIndex;
 
+            // Gives the keyIndex a numerical value if soundKey is not
+            if (soundKey.equals("*")) {
+                keyIndex = 10;
+            }
+            else if (soundKey.equals("#")) {
+                keyIndex = 11;
+            }
+            else {
+                keyIndex = Integer.parseInt(soundKey);
+            }
 
-                System.out.println("SoundIndex: " + soundKey);
-
-                // Check if keyIndex is a valid index in Util.DEFAULT_VOICE_RESOURCE_IDS
-                if (keyIndex >= 0 && keyIndex < Util.DEFAULT_VOICE_RESOURCE_IDS.length) {
-                    int resourceId = Util.DEFAULT_VOICE_RESOURCE_IDS[keyIndex];
-
-
-
-
-                    int soundId = soundPool.load(context, resourceId, 1);
-                    soundIds.put(soundKey, soundId);
-                    System.out.println("Soundkey: " + soundKey);
-                } else {
-                    System.out.println("SoundPlayer Invalid key index: " + soundKey);
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("SoundPlayer nvalid soundKey: " + soundKey);
+            // Checks if the keyIndex is avalilable
+            if (keyIndex >= 0 && keyIndex < Util.DEFAULT_VOICE_RESOURCE_IDS.length) {
+                int resourceId = Util.DEFAULT_VOICE_RESOURCE_IDS[keyIndex];
+                // Loads the sound
+                int soundId = soundPool.load(context, resourceId, 1);
+                soundIds.put(soundKey, soundId);
             }
         }
     }
 
-
-
-
-
+    // Method to play the sound
     public void playSound(DialpadButton dialpadButton) {
-        // Plays the specified sound
+
+        // Gets the button title to use as key in soundIds
         String buttonTitle = dialpadButton.getTitleText();
         Integer soundId = soundIds.get(buttonTitle);
 
-        System.out.println("Key passed: " + buttonTitle);
-        System.out.println("Value passed: " + soundId);
-
-
+        // Plays the sound if not null
         if (soundId != null) {
             soundPool.play(soundId, 1f, 1f, 1, 0, 1f);
-        } else {
-            // Handle the case where soundId is null (button title not found in the map)
-            Log.e("SoundPlayer", "Sound ID not found for button title: " + buttonTitle);
         }
-
-
-//        if (soundPool != null) {
-//            soundPool.play(Util.DEFAULT_VOICE_RESOURCE_IDS[Integer.parseInt(Util.DEFAULT_VOICE_FILE_NAMES.get(dialpadButton.getTitleText()))], 1f, 1f, 1, 0, 1f);
-//        }
-
-//        soundPool.play(Util.DEFAULT_VOICE_RESOURCE_IDS[Integer.parseInt(dialpadButton.getTitleText())], 1f, 1f, 1, 0, 1f);
-//        if (soundIndex != null) {
-//            soundPool.play(Integer.parseInt(Util.DEFAULT_VOICE_FILE_NAMES.get(soundIndex)), 1f, 1f, 1, 0, 1f);
-//        }
     }
 
+    // Releases each sound in soundPool
     public void destroy() {
         if (soundPool != null) {
-            System.out.println("Soundpool not null in destroy");
-            // Iterate over resources for each sound and unloads it to make it unavailable to free up resources
             for (int soundId : soundIds.values()) {
                 soundPool.unload(soundId);
             }
         }
-        // Releases soundpool and sets it to null
         soundPool.release();
         soundPool = null;
-        System.out.println("Soundpool set to null in destroy");
     }
 }

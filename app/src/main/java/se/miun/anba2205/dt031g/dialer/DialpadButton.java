@@ -4,12 +4,8 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -25,48 +21,35 @@ public class DialpadButton extends ConstraintLayout {
     private SoundPlayer soundPlayer;
     private OnTextUpdateListener listener;
 
-
-
     public DialpadButton(Context context) {
         super(context);
         initialize(context, null);
-
     }
 
     public DialpadButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize(context, attrs);
-
     }
 
     public DialpadButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initialize(context, attrs);
-
     }
 
+    // Interface for custom listener
     public interface OnTextUpdateListener {
         void onTextUpdate(DialpadButton dialpadButton);
     }
 
-
-
+    // Sets the custom listener
     public void setCustomClickListener(OnTextUpdateListener listener) {
-        System.out.println("LISTENER: "+listener);
         this.listener = listener;
     }
-
 
     // Initializes the view
     public void initialize(Context context, AttributeSet attrs) {
 
         soundPlayer = new SoundPlayer(context);
-//        this.listener = null;
-
-        // Inflates the layout using binding
-//        DialpadButtonBinding binding = DialpadButtonBinding.inflate(LayoutInflater.from(context), this, true);
-//        title = binding.title;
-//        message = binding.message;
 
         inflate(getContext(), R.layout.dialpad_button, this);
         title = findViewById(R.id.title);
@@ -96,78 +79,7 @@ public class DialpadButton extends ConstraintLayout {
             } finally {
                 typedArray.recycle();
             }
-
-
         }
-
-
-
-
-
-//        Dialpad dialpad = new Dialpad(context);
-
-        // Sets the onClickListener which triggers the ObjectAnimator
-//        binding.getRoot().setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                scaleAnimator.start();
-//
-//                if (soundPlayer != null && title != null) {
-//                    String titleText = title.getText().toString();
-//
-//                    Log.d("Title: ", titleText);
-
-
-
-//                    soundPlayer.playSound(SoundPlayer.Sound.valueOf(titleText));
-                    // Switches between sounds based on which button is clicked
-
-
-
-
-//                    switch (titleText) {
-//                        case "1":
-//                            soundPlayer.playSound("1");
-//                            break;
-//                        case "2":
-//                            soundPlayer.playSound(SoundPlayer.Sound.TWO);
-//                            break;
-//                        case "3":
-//                            soundPlayer.playSound(SoundPlayer.Sound.THREE);
-//                            break;
-//                        case "4":
-//                            soundPlayer.playSound(SoundPlayer.Sound.FOUR);
-//                            break;
-//                        case "5":
-//                            soundPlayer.playSound(SoundPlayer.Sound.FIVE);
-//                            break;
-//                        case "6":
-//                            soundPlayer.playSound(SoundPlayer.Sound.SIX);
-//                            break;
-//                        case "7":
-//                            soundPlayer.playSound(SoundPlayer.Sound.SEVEN);
-//                            break;
-//                        case "8":
-//                            soundPlayer.playSound(SoundPlayer.Sound.EIGHT);
-//                            break;
-//                        case "9":
-//                            soundPlayer.playSound(SoundPlayer.Sound.NINE);
-//                            break;
-//                        case "0":
-//                            soundPlayer.playSound(SoundPlayer.Sound.ZERO);
-//                            break;
-//                        case "*":
-//                            soundPlayer.playSound(SoundPlayer.Sound.STAR);
-//                            break;
-//                        case "#":
-//                            soundPlayer.playSound(SoundPlayer.Sound.POUND);
-//                            break;
-
-//                    }
-
-//                }
-//            }
-//        });
     }
 
     // Setter method for SoundPlayer
@@ -189,29 +101,23 @@ public class DialpadButton extends ConstraintLayout {
         }
     }
 
+    // Getter for title
     public String getTitleText() {
         return title.getText().toString();
     }
 
+    // OnTouchEvent for button presses
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (listener != null) {
                     listener.onTextUpdate(this);
-
                 }
-                soundPlayer.playSound(this);
-
                 animateButton();
-
-//                SoundPlayer.getInstance(this.getContext().getApplicationContext()).playSound(this);
-//                if (isAnimationActivated) {
-//                    animateBtnDown();
-//                }
                 break;
             case MotionEvent.ACTION_UP:
-
+                soundPlayer.playSound(this);
                 break;
             default:
                 return false;
@@ -234,7 +140,6 @@ public class DialpadButton extends ConstraintLayout {
         scaleAnimator.setInterpolator(new LinearInterpolator());
         scaleAnimator.start();
     }
-
 }
 
 

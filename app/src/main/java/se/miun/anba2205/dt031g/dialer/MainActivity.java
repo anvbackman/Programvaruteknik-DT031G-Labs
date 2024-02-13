@@ -11,14 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import java.io.File;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private boolean isAboutUsed = false;
-    private boolean isSoundCopied = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,24 +117,17 @@ public class MainActivity extends AppCompatActivity {
         isAboutUsed = savedInstanceState.getBoolean("about_dialog_state");
     }
 
+    // Method to copy sound to new directory utilizing the Util class
     private void copySound() {
+        // If sound not already in directory
         if (!Util.defaultVoiceExist(this)) {
             boolean copied = Util.copyDefaultVoiceToInternalStorage(this);
-
             if (copied) {
                 Toast.makeText(this, "Files Copied.", Toast.LENGTH_SHORT).show();
-//                isSoundCopied = true;
-                System.out.println("copied and changed to true");
-                Log.d("Copy: ", "siiiiii");
             }
             else {
                 Toast.makeText(this, "Failed to copy default voice files.", Toast.LENGTH_SHORT).show();
-                System.out.println("Not copied");
-                Log.d("Copy: ", "nein");
-//                isSoundCopied = false;
             }
-
-
         }
     }
 }
