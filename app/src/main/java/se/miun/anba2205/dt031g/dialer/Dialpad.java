@@ -185,6 +185,12 @@ public class Dialpad extends ConstraintLayout {
             public void onClick(View view) {
 
                 if (!inputText.isEmpty()) {
+
+
+                    Intent intentCallList = new Intent(getContext(), CallListActivity.class);
+                    intentCallList.putExtra("newNumber", inputText);
+                    getContext().startActivity(intentCallList);
+
                     String encodedNumber = Uri.encode(inputText);
                     Intent intent = new Intent(Intent.ACTION_DIAL);
                     intent.setData(Uri.parse("tel: " + encodedNumber));
@@ -203,5 +209,9 @@ public class Dialpad extends ConstraintLayout {
         return Arrays.asList(dialpadButtonOne, dialpadButtonTwo, dialpadButtonThree, dialpadButtonFour, dialpadButtonFive,
                 dialpadButtonSix, dialpadButtonSeven, dialpadButtonEight, dialpadButtonNine, dialpadButtonZero,
                 dialpadButtonPound, dialpadButtonStar);
+    }
+
+    public String getInputText() {
+        return inputText;
     }
 }

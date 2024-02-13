@@ -15,6 +15,7 @@
         app:key="stored_numbers"
         app:title="Delete stored numbers"
         app:summary="Delete stored telephone numbers from storage"
+        app:icon="@drawable/baseline_delete_forever_24"
         />
 
 
