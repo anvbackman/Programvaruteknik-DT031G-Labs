@@ -29,10 +29,10 @@ import java.util.Objects;
 
 public class CallListActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private String text = "";
+
     private TextView textView;
     private List<String> calledNumbers;
-    private boolean saveNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,15 +83,16 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        boolean saveNumber = sharedPreferences.getBoolean("switch", false);
+//        boolean saveNumber = sharedPreferences.getBoolean("switch", false);
 
 
 
 
-        System.out.println("Resumed: " + textView);
+//        System.out.println("Resumed: " + textView);
 
         String newNumber = getIntent().getStringExtra("newNumber");
         if (newNumber != null && !newNumber.isEmpty()) {
+            boolean saveNumber = sharedPreferences.getBoolean("switch", false);
             addNumberToCallList(newNumber, saveNumber);
         }
 
@@ -111,7 +112,7 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
 
     }
 
-    public void addNumberToCallList(String number, boolean isSave) {
+    public void addNumberToCallList(String number, boolean isSaved) {
 
 
 
@@ -119,7 +120,7 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         calledNumbers = new ArrayList<>(sharedPreferences.getStringSet("call_list_textView", new HashSet<>()));
 
-        if (isSave) {
+        if (isSaved) {
             if (!calledNumbers.contains(number)) {
                 calledNumbers.add(number);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -129,6 +130,7 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
                 updateText();
             }
         }
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -175,16 +177,6 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
 
 
 
-//    private void saveNumber(boolean isSaved) {
-//        TextView textView = findViewById(R.id.call_list_textView);
-//        if (isSaved) {
-//            textView.setText(R.string.call_list_text);
-//        }
-//        else {
-//            textView.setText(R.string.empty_call_list);
-//        }
-//
-//    }
 
 
 

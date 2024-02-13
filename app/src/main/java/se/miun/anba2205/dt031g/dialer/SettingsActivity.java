@@ -11,6 +11,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -45,11 +46,21 @@ public class SettingsActivity extends AppCompatActivity {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
             Preference deletePreference = findPreference("stored_numbers");
+            SwitchPreferenceCompat switchPreference = findPreference("switch");
 
             deletePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
                     deleteStoredNumbers(requireContext());
+                    return true;
+                }
+            });
+
+            switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    boolean isSave = (Boolean) newValue;
+                    updateNumber(requireContext(), isSave);
                     return true;
                 }
             });
@@ -64,6 +75,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putStringSet("call_list_textView", calledNumbers);
+        editor.apply();
+    }
+
+    private static void updateNumber(Context context, boolean isSave) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("switch", isSave);
         editor.apply();
     }
 
