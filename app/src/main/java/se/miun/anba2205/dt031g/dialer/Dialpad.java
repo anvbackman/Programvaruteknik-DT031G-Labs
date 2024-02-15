@@ -75,9 +75,9 @@ public class Dialpad extends ConstraintLayout {
     // Method to set click listener on all buttons and add the digit to the TextView
     private void setButtonOnClickListener() {
         for (DialpadButton dialpadButton : getButtons()) {
-            dialpadButton.setCustomClickListener(new DialpadButton.OnTextUpdateListener() {
+            dialpadButton.setCustomClickListener(new DialpadButton.OnClickListener() {
                 @Override
-                public void onTextUpdate(DialpadButton dialpadButton) {
+                public void onClick(DialpadButton dialpadButton) {
                     inputText += dialpadButton.getTitleText();
                     numberEntered.setText(inputText);
                 }

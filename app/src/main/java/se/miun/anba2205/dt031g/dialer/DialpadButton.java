@@ -19,7 +19,7 @@ public class DialpadButton extends ConstraintLayout {
     private TextView title;
     private TextView message;
     private SoundPlayer soundPlayer;
-    private OnTextUpdateListener listener;
+    private OnClickListener listener;
 
     public DialpadButton(Context context) {
         super(context);
@@ -37,12 +37,12 @@ public class DialpadButton extends ConstraintLayout {
     }
 
     // Interface for custom listener
-    public interface OnTextUpdateListener {
-        void onTextUpdate(DialpadButton dialpadButton);
+    public interface OnClickListener {
+        void onClick(DialpadButton dialpadButton);
     }
 
     // Sets the custom listener
-    public void setCustomClickListener(OnTextUpdateListener listener) {
+    public void setCustomClickListener(OnClickListener listener) {
         this.listener = listener;
     }
 
@@ -112,7 +112,7 @@ public class DialpadButton extends ConstraintLayout {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (listener != null) {
-                    listener.onTextUpdate(this);
+                    listener.onClick(this);
                 }
                 animateButton();
                 break;

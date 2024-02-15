@@ -1,15 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Dialer</string>
 
-    <string name="dial_text">This is the Dial activity</string>
-
     <string name="call_list_text">This is the Call List activity</string>
+
     <string name="empty_call_list">No stored numbers</string>
 
     <string name="welcome_message">What would you like to do?</string>
-
-
-
 
     <string name="about_text">This app is supposed to mimic the keypad on a phone. The app will consist of activities to:\n
     • Enter numbers to dial\n
@@ -19,25 +15,6 @@
 
     <string name="title_activity_settings">Settings</string>
 
-
-
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_maps">MapsActivity</string>
-
-    <string name="stored_numbers_key">2233</string>
-
 
 </resources>
