@@ -9,12 +9,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String URL_LOCATION = "https://dt031g.programvaruteknik.nu/dialer/voices/";
+    private WebView webView;
     private boolean isAboutUsed = false;
 
     @Override
@@ -97,6 +100,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button startDownload = findViewById(R.id.DOWNLOAD);
+        startDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DownloadActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
     }
 
     @Override

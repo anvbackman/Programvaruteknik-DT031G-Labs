@@ -1,4 +1,8 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
 
     <SwitchPreferenceCompat
         app:key="switch"
@@ -12,5 +16,12 @@
         app:title="Delete stored numbers"
         app:summary="Delete stored telephone numbers from storage"
         app:icon="@drawable/baseline_delete_forever_24"
+        />
+
+    <ListPreference
+        app:title="Voice"
+        app:key="change_voice"
+
+        app:useSimpleSummaryProvider="true"
         />
 </PreferenceScreen>

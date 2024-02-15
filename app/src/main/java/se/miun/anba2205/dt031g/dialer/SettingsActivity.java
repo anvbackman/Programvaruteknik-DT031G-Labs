@@ -5,14 +5,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -44,6 +47,16 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+            ListPreference voicePreference = findPreference("change_voice");
+            File voiceDirectory = Util.getInternalStorageDir(getActivity().getApplicationContext());
+            String[] voiceNames = voiceDirectory.list();
+
+            if (voiceNames != null) {
+                voicePreference.setEntries(voiceNames);
+                voicePreference.setEntryValues(voiceNames);
+            }
+
 
             Preference deletePreference = findPreference("stored_numbers");
             SwitchPreferenceCompat switchPreference = findPreference("switch");
@@ -89,4 +102,10 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putBoolean("switch", isSave);
         editor.apply();
     }
+
+    private void updateVoices() {
+
+    }
+
+
 }
