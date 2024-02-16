@@ -52,60 +52,17 @@ public class DialActivity extends AppCompatActivity {
 
                 requestCallPermission();
 
-//                requestCallPermission();
-//                Intent intent = new Intent(Intent.ACTION_CALL);
-//                System.out.println("Callbutton clicked DialActivity");
-//                if (callPermissionGranted()) {
-//                    System.out.println("Permission granted starting call from app");
-//
-//                    intent.setData(Uri.parse("tel: " + instance.getNumber()));
-//                    startActivity(intent);
-//                }
-//                else {
-//                    instance.startCall();
-//                    System.out.println("Starting call from phone");
-//                }
+
             }
         });
 
 
-//            callButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//
-////
-//                }
-//            });
+
         }
 
 
 
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)) {
-////            performAction();
-//        }
-//        else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.REQUEST_PERMISSION)) {
-//            // Explain to user why permission is needed
-//            Toast.makeText(this, "Allow call?", Toast.LENGTH_SHORT).show();
-//        }
-//        else {
-//            requestPermissions(this, new String[] {Manifest.permission.REQUESTED_PERMISSION}, REQUEST_CODE);
-//        }
 
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-//        switch (requestCode) {
-//            case PERMISSION_REQUEST_CODE:
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    System.out.println("Calling");
-//                }
-//        }
-//    }
-
-//    private void requestPermission() {
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.REQUESTED_PERMISSION}, REQUEST_CALL_PHONE_PERMISSION);
-//    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -115,7 +72,7 @@ public class DialActivity extends AppCompatActivity {
     private void requestCallPermission() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            revokeSelfPermissionOnKill(Manifest.permission.CALL_PHONE);
+            revokeSelfPermissionOnKill(Manifest.permission.CALL_PHONE); // Used to remove permission on kill for easier testing
 
             String callPermission = Manifest.permission.CALL_PHONE;
             int hasPermission = ContextCompat.checkSelfPermission(this, callPermission);
@@ -125,6 +82,7 @@ public class DialActivity extends AppCompatActivity {
             }
             else {
                 Toast.makeText(this, "Already permitted", Toast.LENGTH_SHORT).show();
+                startCall();
             }
         }
 
@@ -134,17 +92,26 @@ public class DialActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
         Dialpad instance = findViewById(R.id.dialpad);
-        Intent intent = new Intent(Intent.ACTION_CALL);
+//        Intent intent = new Intent(Intent.ACTION_CALL);
         if (results[0] == PackageManager.PERMISSION_GRANTED) {
             System.out.println("Call granted");
-            intent.setData(Uri.parse("tel: " + instance.getNumber()));
-            startActivity(intent);
+//            intent.setData(Uri.parse("tel: " + instance.getNumber()));
+//            startActivity(intent);
+            startCall();
         }
         else {
             System.out.println("Call not granted");
             instance.startCall();
         }
         super.onRequestPermissionsResult(requestCode, permissions, results);
+    }
+
+    private void startCall() {
+
+        Dialpad instance = findViewById(R.id.dialpad);
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel: " + instance.getNumber()));
+        startActivity(intent);
     }
 
 
