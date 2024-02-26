@@ -19,5 +19,8 @@
     <string name="title_activity_download">Download Voices</string>
 
     <string name="url_location">https://dt031g.programvaruteknik.nu/dialer/voices/</string>
+    <string name="upload_text"></string>
+
+
 
 </resources>
