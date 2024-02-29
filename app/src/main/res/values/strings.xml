@@ -20,6 +20,7 @@
 
     <string name="url_location">https://dt031g.programvaruteknik.nu/dialer/voices/</string>
     <string name="upload_text"></string>
+    <string name="storage_path">res/voices/</string>
 
 
 
