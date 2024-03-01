@@ -32,6 +32,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.DataOutputStream;
@@ -77,6 +78,7 @@ public class DownloadActivity extends AppCompatActivity {
         webView = findViewById(R.id.web_view);
         progressBar = findViewById(R.id.progress_bar);
         progressBarLayout = findViewById(R.id.progress_bar_layout);
+        progressBar.setMax(100);
 
         String url = getString(R.string.url_location);
 //        String path = getString(R.string.storage_path);
@@ -145,6 +147,14 @@ public class DownloadActivity extends AppCompatActivity {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        animateView(progressBarLayout, View.VISIBLE);
+                    }
+                });
+
                 try {
                     URL url = new URL(urlPath);
                     HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -157,9 +167,17 @@ public class DownloadActivity extends AppCompatActivity {
                              FileOutputStream output = new FileOutputStream(destination)) {
                             byte[] data = new byte[1024];
                             int bytesRead;
+                            long total = 0;
 
                             while ((bytesRead = input.read(data)) != -1) {
+                                total += bytesRead;
+                                publishProgress((int) (total * 100 / connection.getContentLength()));
                                 output.write(data, 0, bytesRead);
+                                try {
+                                    Thread.sleep(10);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
 
@@ -176,6 +194,12 @@ public class DownloadActivity extends AppCompatActivity {
                     } else {
                         throw new Exception("Failed to download file: " + connection.getResponseCode() + " " + connection.getResponseMessage());
                     }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            animateView(progressBarLayout, View.GONE);
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -191,7 +215,8 @@ public class DownloadActivity extends AppCompatActivity {
             @Override
             public void run() {
                 progressBar.setProgress(progress[progress.length - 1]);
-
+                TextView progressText = findViewById(R.id.progress_bar_text);
+                progressText.setText(getString(R.string.download_progress) + " " + progress[progress.length - 1] + "%");
             }
         });
 
