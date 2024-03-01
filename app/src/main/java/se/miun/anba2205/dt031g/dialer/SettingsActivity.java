@@ -49,8 +49,10 @@ public class SettingsActivity extends AppCompatActivity {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
             ListPreference voicePreference = findPreference("change_voice");
-            File voiceDirectory = Util.getInternalStorageDir(getActivity().getApplicationContext());
+            File voiceDirectory = new File(Util.getInternalStorageDir(getActivity().getApplicationContext()), "voices");
             String[] voiceNames = voiceDirectory.list();
+            System.out.println("voiceDirectory" + voiceDirectory);
+            System.out.println("Voice names" + voiceNames.toString());
 
             if (voiceNames != null) {
                 voicePreference.setEntries(voiceNames);
@@ -79,6 +81,15 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
+
+            voicePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    String voiceName = (String) newValue;
+                    return true;
+                }
+            });
+
         }
     }
 

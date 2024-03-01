@@ -21,7 +21,7 @@
     <ListPreference
         app:title="Voice"
         app:key="change_voice"
-
+        android:defaultValue="Default Voice"
         app:useSimpleSummaryProvider="true"
         />
 </PreferenceScreen>

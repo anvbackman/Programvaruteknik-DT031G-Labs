@@ -170,6 +170,9 @@ public class DownloadActivity extends AppCompatActivity {
                         Util.unzip(destination, destinationDir);
                         System.out.println("Downloaded file: " + destination);
                         System.out.println("Destination: " + destinationDir);
+                        if (destination.exists()) {
+                            destination.delete();
+                        }
                     } else {
                         throw new Exception("Failed to download file: " + connection.getResponseCode() + " " + connection.getResponseMessage());
                     }
