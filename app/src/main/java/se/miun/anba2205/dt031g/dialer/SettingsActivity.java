@@ -76,8 +76,18 @@ public class SettingsActivity extends AppCompatActivity {
             switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-                    boolean isSave = (Boolean) newValue;
-                    updateNumber(requireContext(), isSave);
+                    if ((boolean) newValue) { // Check if the new value is true
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+                        Set<String> calledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
+
+                        String lastDialedNumber;
+                        if (calledNumbers.isEmpty()) {
+                            lastDialedNumber = null;
+                        } else {
+                            lastDialedNumber = calledNumbers.iterator().next();
+                        }
+                        saveNumber(requireContext(), lastDialedNumber);
+                    }
                     return true;
                 }
             });
@@ -93,26 +103,44 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    // Method to add numbers to SharedPreferences
+    public static void saveNumber(Context context, String number) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean isSave = sharedPreferences.getBoolean("switch", false); // Get the state of the switch preference
+
+        if (isSave) { // If the switch preference is set to save
+            Set<String> originalCalledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
+
+            // Create a new set with the same elements as the original set
+            Set<String> calledNumbers = new HashSet<>(originalCalledNumbers);
+
+            calledNumbers.add(number);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putStringSet("calledNumbers", calledNumbers);
+            editor.apply();
+        }
+    }
+
+
     // Method to delete numbers from SharedPreferences
     private static void deleteStoredNumbers(Context context) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        // Gets the saved numbers and clears them
-        Set<String> calledNumbers = sharedPreferences.getStringSet("call_list_textView", new HashSet<>());
-        calledNumbers.clear();
-        // Then puts the cleared numbers back into the textView
+        // Put an empty set into SharedPreferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet("call_list_textView", calledNumbers);
+        editor.putStringSet("calledNumbers", new HashSet<>());
         editor.apply();
+
+
     }
 
     // Method to update SharedPreference for saving numbers
-    private static void updateNumber(Context context, boolean isSave) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("switch", isSave);
-        editor.apply();
-    }
+//    private static void updateNumber(Context context, boolean isSave) {
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putBoolean("switch", isSave);
+//        editor.apply();
+//    }
 
     private void updateVoices() {
 

@@ -3,9 +3,13 @@ package se.miun.anba2205.dt031g.dialer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.preference.PreferenceManager;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class CallListActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -28,18 +33,18 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
 
-        // Retrieves the TextView
-        textView = findViewById(R.id.call_list_textView);
-
-        // Retrieves saved numbers or creates an empty list
-        if (savedInstanceState != null) {
-            calledNumbers = new ArrayList<>(savedInstanceState.getStringArrayList("calledNumbers"));
-        }
-        else {
-            calledNumbers = new ArrayList<>();
-        }
-
         updateText();
+
+
+//        // Retrieves saved numbers or creates an empty list
+//        if (savedInstanceState != null) {
+//            calledNumbers = new ArrayList<>(savedInstanceState.getStringArrayList("calledNumbers"));
+//        }
+//        else {
+//            calledNumbers = new ArrayList<>();
+//        }
+//
+//        updateText();
     }
 
 
@@ -52,17 +57,15 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
-        // Retrieve numbers from intent and adds it to the call list via addNumberToCallList method
-        String newNumber = getIntent().getStringExtra("newNumber");
-        if (newNumber != null && !newNumber.isEmpty()) {
-            // Gets the state of switch (if numbers should be saved or not)
-            boolean saveNumber = sharedPreferences.getBoolean("switch", false);
-            addNumberToCallList(newNumber, saveNumber);
-        }
+        // Retrieves numbers from the call listcalledNumbe/
 
-        // Retrieves numbers from the call list
-        calledNumbers = new ArrayList<>(sharedPreferences.getStringSet("call_list_textView", new HashSet<>()));
-        updateText();
+//        // Retrieve numbers from intent and adds it to the call list via addNumberToCallList method
+//        String newNumber = getIntent().getStringExtra("newNumber");
+//        if (newNumber != null && !newNumber.isEmpty()) {
+//            // Gets the state of switch (if numbers should be saved or not)
+//            boolean saveNumber = sharedPreferences.getBoolean("switch", false);
+//            addNumberToCallList(newNumber, saveNumber);
+//        }
     }
 
     @Override
@@ -89,7 +92,7 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
                 editor.putStringSet("call_list_textView", new HashSet<>(calledNumbers));
                 editor.apply();
 
-                updateText();
+//                updateText();
             }
         }
     }
@@ -105,28 +108,49 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
 
     // Clears the numbers and update the displayed text
     public void clearNumbers() {
-        calledNumbers.clear();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // Put an empty set into SharedPreferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet("call_list_textView", new HashSet<>(calledNumbers));
+        editor.putStringSet("calledNumbers", new HashSet<>());
         editor.apply();
 
+//        textView.setText(R.string.empty_call_list);
         updateText();
     }
 
+    // Method to delete numbers from SharedPreferences
+    private void deleteStoredNumbers() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        // Put an empty set into SharedPreferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet("calledNumbers", new HashSet<>());
+        editor.apply();
 
-    // Method to update the displayed text.
-    // If there is no numbers it is shown, else sets the text for all numbers
+
+//        updateText();
+    }
+
+
+//     Method to update the displayed text.
+//     If there is no numbers it is shown, else sets the text for all numbers
     private void updateText() {
+        // Retrieves the TextView
+        textView = findViewById(R.id.call_list_textView);
+
+//        TextView callListTextView = findViewById(R.id.call_list_textView);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Set<String> calledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
+
+        // Log the contents of SharedPreferences
+        System.out.println("calledNumbers: " + calledNumbers);
+
+        String calledNumbersString = TextUtils.join("\n", calledNumbers);
+
         if (calledNumbers.isEmpty()) {
             textView.setText(R.string.empty_call_list);
         }
         else {
-            StringBuilder builder = new StringBuilder();
-            for (String number : calledNumbers) {
-                builder.append(number).append("\n");
-            }
-            textView.setText(builder.toString().trim());
+            textView.setText(calledNumbersString);
         }
     }
 
@@ -159,7 +183,7 @@ public class CallListActivity extends AppCompatActivity implements SharedPrefere
 
         if (savedInstanceState != null) {
             calledNumbers = new ArrayList<>(savedInstanceState.getStringArrayList("calledNumbers"));
-            updateText();
+//            updateText();
         }
     }
 }

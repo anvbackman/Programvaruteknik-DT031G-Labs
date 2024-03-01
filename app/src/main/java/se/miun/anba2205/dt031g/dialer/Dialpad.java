@@ -2,6 +2,7 @@ package se.miun.anba2205.dt031g.dialer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,8 +12,12 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceManager;
+
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Dialpad extends ConstraintLayout {
 
@@ -140,17 +145,27 @@ public class Dialpad extends ConstraintLayout {
 
                 if (!inputText.isEmpty()) {
                     // Used to store number
-//                    Intent intentCallList = new Intent(getContext(), CallListActivity.class);
-//                    intentCallList.putExtra("newNumber", inputText);
-//                    getContext().startActivity(intentCallList);
+                    Intent intentCallList = new Intent(getContext(), CallListActivity.class);
 
                     String encodedNumber = Uri.encode(inputText); // Encodes the number to allow "#"
+                    intentCallList.putExtra("encodedNumber", encodedNumber);
+
                     setNumber(encodedNumber);
-                    // Starts a new intent for the call
-                    startCall();
+//                    SettingsActivity.saveNumber(getContext(), encodedNumber);
+                    System.out.println("number set to: " + encodedNumber);
+
+                    // Save the encoded number in SharedPreferences
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    Set<String> originalCalledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
+
+                    // Create a new set with the same elements as the original set
+                    Set<String> calledNumbers = new HashSet<>(originalCalledNumbers);
+
+                    calledNumbers.add(encodedNumber);
+                    sharedPreferences.edit().putStringSet("calledNumbers", calledNumbers).apply();
+
                     setClicked(true);
-                    System.out.println("Set to: " + isClicked);
-                    System.out.println("CLICKED IN DIALPAD");
+
 
                     if (callButtonClickListener != null) {
                         callButtonClickListener.onCallButtonClick(isClicked);

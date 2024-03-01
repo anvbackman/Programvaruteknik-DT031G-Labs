@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.preference.PreferenceManager;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -22,7 +24,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class DialActivity extends AppCompatActivity {
 
@@ -109,9 +113,33 @@ public class DialActivity extends AppCompatActivity {
     private void startCall() {
 
         Dialpad instance = findViewById(R.id.dialpad);
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel: " + instance.getNumber()));
+        String callPermission = Manifest.permission.CALL_PHONE;
+        int hasPermission = ContextCompat.checkSelfPermission(this, callPermission);
+
+        Intent intent;
+        if (hasPermission == PackageManager.PERMISSION_GRANTED) {
+            intent = new Intent(Intent.ACTION_CALL);
+            System.out.println("Permission granted");
+        } else {
+            intent = new Intent(Intent.ACTION_DIAL);
+            System.out.println("Permission denied");
+        }
+        String dialedNumber = instance.getNumber();
+        intent.setData(Uri.parse("tel: " + dialedNumber));
         startActivity(intent);
+
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        Set<String> originalCalledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
+//
+//
+//        Set<String> calledNumbers = new HashSet<>(originalCalledNumbers);
+//
+//        calledNumbers.add(dialedNumber);
+//        sharedPreferences.edit().putStringSet("calledNumbers", calledNumbers).apply();
+
+
+
+
     }
 
 
