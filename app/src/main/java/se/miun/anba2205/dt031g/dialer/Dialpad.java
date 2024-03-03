@@ -151,18 +151,23 @@ public class Dialpad extends ConstraintLayout {
                     intentCallList.putExtra("encodedNumber", encodedNumber);
 
                     setNumber(encodedNumber);
-//                    SettingsActivity.saveNumber(getContext(), encodedNumber);
                     System.out.println("number set to: " + encodedNumber);
 
                     // Save the encoded number in SharedPreferences
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                    Set<String> originalCalledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
+                    boolean isSave = sharedPreferences.getBoolean("switch", false); // Get the state of the switch preference
 
-                    // Create a new set with the same elements as the original set
-                    Set<String> calledNumbers = new HashSet<>(originalCalledNumbers);
+                    if (isSave) { // If the switch preference is set to save
+                        Set<String> originalCalledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
 
-                    calledNumbers.add(encodedNumber);
-                    sharedPreferences.edit().putStringSet("calledNumbers", calledNumbers).apply();
+                        // Create a new set with the same elements as the original set
+                        Set<String> calledNumbers = new HashSet<>(originalCalledNumbers);
+
+                        calledNumbers.add(encodedNumber);
+                        sharedPreferences.edit().putStringSet("calledNumbers", calledNumbers).apply();
+                    }
+
+
 
                     setClicked(true);
 
@@ -175,11 +180,11 @@ public class Dialpad extends ConstraintLayout {
         });
     }
 
-    public void startCall() {
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel: " + getNumber()));
-        getContext().startActivity(intent);
-    }
+//    public void startCall() {
+//        Intent intent = new Intent(Intent.ACTION_DIAL);
+//        intent.setData(Uri.parse("tel: " + getNumber()));
+//        getContext().startActivity(intent);
+//    }
 
     // Returns all buttons as List
     private List<DialpadButton> getButtons() {

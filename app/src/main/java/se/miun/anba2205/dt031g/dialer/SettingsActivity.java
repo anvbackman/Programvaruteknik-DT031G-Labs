@@ -76,18 +76,24 @@ public class SettingsActivity extends AppCompatActivity {
             switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("switch", (boolean) newValue);
+                    editor.apply();
+
                     if ((boolean) newValue) { // Check if the new value is true
-                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
                         Set<String> calledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
+                        System.out.println("ADDING NUMBER");
 
                         String lastDialedNumber;
                         if (calledNumbers.isEmpty()) {
-                            lastDialedNumber = null;
+                            lastDialedNumber = getString(R.string.empty_call_list);
                         } else {
                             lastDialedNumber = calledNumbers.iterator().next();
                         }
                         saveNumber(requireContext(), lastDialedNumber);
                     }
+
                     return true;
                 }
             });
@@ -107,6 +113,7 @@ public class SettingsActivity extends AppCompatActivity {
     public static void saveNumber(Context context, String number) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isSave = sharedPreferences.getBoolean("switch", false); // Get the state of the switch preference
+        System.out.println("isSave: " + isSave);
 
         if (isSave) { // If the switch preference is set to save
             Set<String> originalCalledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
@@ -119,6 +126,7 @@ public class SettingsActivity extends AppCompatActivity {
             editor.putStringSet("calledNumbers", calledNumbers);
             editor.apply();
         }
+
     }
 
 

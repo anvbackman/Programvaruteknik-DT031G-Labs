@@ -99,14 +99,13 @@ public class DialActivity extends AppCompatActivity {
 //        Intent intent = new Intent(Intent.ACTION_CALL);
         if (results[0] == PackageManager.PERMISSION_GRANTED) {
             System.out.println("Call granted");
-//            intent.setData(Uri.parse("tel: " + instance.getNumber()));
-//            startActivity(intent);
             startCall();
         }
         else {
             System.out.println("Call not granted");
-            instance.startCall();
+            startCall();
         }
+//        startCall();
         super.onRequestPermissionsResult(requestCode, permissions, results);
     }
 
@@ -119,50 +118,13 @@ public class DialActivity extends AppCompatActivity {
         Intent intent;
         if (hasPermission == PackageManager.PERMISSION_GRANTED) {
             intent = new Intent(Intent.ACTION_CALL);
-            System.out.println("Permission granted");
         } else {
             intent = new Intent(Intent.ACTION_DIAL);
-            System.out.println("Permission denied");
         }
         String dialedNumber = instance.getNumber();
         intent.setData(Uri.parse("tel: " + dialedNumber));
         startActivity(intent);
-
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        Set<String> originalCalledNumbers = sharedPreferences.getStringSet("calledNumbers", new HashSet<>());
-//
-//
-//        Set<String> calledNumbers = new HashSet<>(originalCalledNumbers);
-//
-//        calledNumbers.add(dialedNumber);
-//        sharedPreferences.edit().putStringSet("calledNumbers", calledNumbers).apply();
-
-
-
-
     }
-
-
-//    private ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-//        if (isGranted) {
-//
-//        }
-//        else {
-//            System.out.println("GET FUK OUT");
-//        }
-//    });
-//
-//
-//    private void requestCallPermission() {
-//        requestPermissionLauncher.launch(android.Manifest.permission.CALL_PHONE);
-//    }
-//
-//
-//    private boolean callPermissionGranted() {
-//        return ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
-//    }
-
-
 
     // Inflates the menu item
     @Override
