@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
-import android.util.Log;
-
 import androidx.preference.PreferenceManager;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,20 +57,14 @@ public class SoundPlayer {
                 // Loads the default sound
                 if (voiceName.equals(Util.DEFAULT_VOICE)) {
                     int soundId = soundPool.load(context, resourceId, 1);
-                    System.out.println("REGULAR: " + resourceId + " " + soundId);
-                    System.out.println("REGULAR Soundkey: " + soundKey + " SoundId: " + soundId);
                     soundIds.put(soundKey, soundId);
                 }
-                else {
+                else { // Loads the custom sound
                     String filename = entry.getValue();
                     File voiceDirectory = Util.getInternalStorageDir(context);
                     File voiceFile = new File(voiceDirectory + "/voices/", voiceName + "/" + filename);
-                    System.out.println("Voice file to play: " + voiceFile);
-                    System.out.println("Voice directory: " + voiceDirectory);
                     if (voiceFile.exists()) {
                         int soundId = soundPool.load(voiceFile.getPath(), 1);
-                        System.out.println("Loaded sound id : " + soundId);
-                        System.out.println("NOT REGULAR Soundkey: " + soundKey + " SoundId: " + soundId);
                         soundIds.put(soundKey, soundId);
                     }
                 }

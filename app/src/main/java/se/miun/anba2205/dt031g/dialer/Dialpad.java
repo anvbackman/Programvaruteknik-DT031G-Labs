@@ -9,11 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.preference.PreferenceManager;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +37,7 @@ public class Dialpad extends ConstraintLayout {
 
     private CallButtonClickListener callButtonClickListener;
 
+    // Custom click listener interface
     public interface CallButtonClickListener {
         void onCallButtonClick(boolean isClicked);
     }
@@ -105,10 +103,6 @@ public class Dialpad extends ConstraintLayout {
         }
     }
 
-
-
-
-
     // Method to remove last digit when backspace button is clicked
     private void setBackspaceListener() {
         Button backspaceButton = findViewById(R.id.clear_button);
@@ -144,14 +138,11 @@ public class Dialpad extends ConstraintLayout {
             public void onClick(View view) {
 
                 if (!inputText.isEmpty()) {
-                    // Used to store number
                     Intent intentCallList = new Intent(getContext(), CallListActivity.class);
 
                     String encodedNumber = Uri.encode(inputText); // Encodes the number to allow "#"
                     intentCallList.putExtra("encodedNumber", encodedNumber);
-
-                    setNumber(encodedNumber);
-                    System.out.println("number set to: " + encodedNumber);
+                    setNumber(encodedNumber); // Set the number to call
 
                     // Save the encoded number in SharedPreferences
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -167,10 +158,7 @@ public class Dialpad extends ConstraintLayout {
                         sharedPreferences.edit().putStringSet("calledNumbers", calledNumbers).apply();
                     }
 
-
-
                     setClicked(true);
-
 
                     if (callButtonClickListener != null) {
                         callButtonClickListener.onCallButtonClick(isClicked);
@@ -180,12 +168,6 @@ public class Dialpad extends ConstraintLayout {
         });
     }
 
-//    public void startCall() {
-//        Intent intent = new Intent(Intent.ACTION_DIAL);
-//        intent.setData(Uri.parse("tel: " + getNumber()));
-//        getContext().startActivity(intent);
-//    }
-
     // Returns all buttons as List
     private List<DialpadButton> getButtons() {
         return Arrays.asList(dialpadButtonOne, dialpadButtonTwo, dialpadButtonThree, dialpadButtonFour, dialpadButtonFive,
@@ -193,13 +175,8 @@ public class Dialpad extends ConstraintLayout {
                 dialpadButtonPound, dialpadButtonStar);
     }
 
-
     public void setClicked(boolean clicked) {
         isClicked = clicked;
-    }
-
-    public boolean getCallButtonClicked() {
-        return isClicked;
     }
 
     public void setNumber(String number) {
@@ -208,5 +185,4 @@ public class Dialpad extends ConstraintLayout {
     public String getNumber() {
         return numberToCall;
     }
-
 }

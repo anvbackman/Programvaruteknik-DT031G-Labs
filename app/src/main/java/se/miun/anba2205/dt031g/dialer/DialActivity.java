@@ -1,17 +1,10 @@
 package se.miun.anba2205.dt031g.dialer;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.preference.PreferenceManager;
-
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -19,20 +12,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
-
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 public class DialActivity extends AppCompatActivity {
 
     private SoundPlayer soundPlayer;
-
-
     private static final int REQUEST_CODE = 1;
 
     @Override
@@ -40,39 +25,27 @@ public class DialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dial);
 
-
-
         // Change of the color of the action bar
         ResourcesCompat.getColor(getResources(), R.color.action_bar, null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.action_bar, null)));
 
-
-
         Dialpad instance = findViewById(R.id.dialpad);
 
+        // Set the call button click listener to request call permission
         instance.setCallButtonClickListener(new Dialpad.CallButtonClickListener() {
             @Override
             public void onCallButtonClick(boolean isClicked) {
-
                 requestCallPermission();
-
-
             }
         });
-
-
-
-        }
-
-
-
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
+    // Requests call permission
     private void requestCallPermission() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -89,32 +62,20 @@ public class DialActivity extends AppCompatActivity {
                 startCall();
             }
         }
-
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
-        Dialpad instance = findViewById(R.id.dialpad);
-//        Intent intent = new Intent(Intent.ACTION_CALL);
-        if (results[0] == PackageManager.PERMISSION_GRANTED) {
-            System.out.println("Call granted");
-            startCall();
-        }
-        else {
-            System.out.println("Call not granted");
-            startCall();
-        }
-//        startCall();
+        startCall();
         super.onRequestPermissionsResult(requestCode, permissions, results);
     }
 
+    // Starts the call based on permission
     private void startCall() {
-
         Dialpad instance = findViewById(R.id.dialpad);
         String callPermission = Manifest.permission.CALL_PHONE;
         int hasPermission = ContextCompat.checkSelfPermission(this, callPermission);
-
+        // Deciding which intent to use based on permission
         Intent intent;
         if (hasPermission == PackageManager.PERMISSION_GRANTED) {
             intent = new Intent(Intent.ACTION_CALL);

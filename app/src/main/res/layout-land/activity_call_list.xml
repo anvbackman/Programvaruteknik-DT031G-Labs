@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/call_list_text"
+            android:text="@string/empty_call_list"
             android:textSize="30sp"
             android:gravity="start"
             android:textColor="@color/text_color"
